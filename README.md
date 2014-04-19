@@ -1,9 +1,12 @@
 node-csgo
 ========
 
+Some information below is related to [node-dota2](https://github.com/RJacksonm1/node-dota2). I will update this file as I make changes.
+---
+
 A node-steam plugin for Counter-Strike: Global Offensive.
 
-Based on node-dota2
+Based on [node-dota2](https://github.com/RJacksonm1/node-dota2)
 
 ## Initializing
 Parameters:
@@ -59,40 +62,6 @@ Leaves a chat channel.
 
 Sends a message to the specified chat channel, won't send if you're not in the channel you try to send to.
 
-
-### Guild
-#### requestGuildData()
-
-Sends a request to the GC for new guild data, which returns `openPartyData` events - telling the client the status of current open parties for each guild, as well as exposing `guildIds` to the client.
-
-
-#### inviteToGuild(guildId, targetAccountId, [callback])
-* `guildId` - ID of a guild.
-* `targetAccountId` - Account ID (lower 32-bits of a 64-bit steam id) of user to invite to guild.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Attempts to invite a user to guild. Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### cancelInviteToGuild(guildId, targetAccountId, [callback])
-* `guildId` - ID of a guild.
-* `targetAccountId` - Account ID (lower 32-bits of a 64-bit steam id) of user whoms guild invite you wish to cancel.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Attempts to cancel a user's guild invitation; use this on your own account ID to reject guild invitations. Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### setGuildAccountRole(guildId, targetAccountId, targetRole, [callback])
-* `guildId` - ID of a guild.
-* `targetAccountId` - Account ID (lower 32-bits of a 64-bit steam id) of user whoms guild invite you wish to cancel.
-* `targetRole` - Role in guild to have.
-* * `0` - Kick member from guild.
-* * `1` - Leader.
-* * `2` - Officer.
-* * `3` - Member.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Attempts to set a user's role within a guild; use this with your own account ID and the 'Member' role to accept guild invitations. Requires the GC to be ready (listen for the `ready` event before calling).
-
-
 ### Community
 #### profileRequest(accountId, requestName, [callback])
 * `accountId` - Account ID (lower 32-bits of a 64-bit Steam ID) of the user whose passport data you wish to view.
@@ -126,32 +95,6 @@ Note:  There is a server-side rate-limit of 100 requests per 24 hours on this me
 #### matchmakingStatsRequest()
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the Game Coordinator's response (cannot take a callback because of Steam's backend, or RJackson's incompetence; not sure which). Rqeuired the GC to be ready (listen for the `ready` event before calling).
-
-
-### Lobbies
-#### createPracticeLobby([gameName], [password], [serverRegion], [gameMode], [callback])
-* `[gameName]` Display name for the lobby (optional).
-* `[password]` Password to restrict access to the lobby (optional).
-* `[serverRegion]` Server region for the lobby` see [ServerRegion Enum](#Enums) (optional).
-* `[gameMode]` Gamemode for the lobby` see [GameMode Enum](#Enums)(optional).
-* `[callback]` - optional callback` returns args: `err` response`.
-
-Sends a message to the Game Coordinating requesting to create a lobby.  Provide a callback or listen for `practiceLobbyJoinResponse` for the Game Coordinator's response (Node:  GC seems to erroneously return `DOTA_JOIN_RESULT_ALREADY_IN_GAME`).  Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### leavePracticeLobby()
-
-Sends a message to the Game Coordinator requesting to leave the current lobby.  Requires the GC to be ready (listen for the `ready` event before calling).
-
-
-
-### Leagues
-#### leaguesInMonthRequest([month], [year], [callback])
-* `[month]` - Int for the month (MM) you want to query data for.  Defaults to current month. **IMPORTANT NOTE**:  Month is zero-aligned, not one-aligned; so Jan = 00, Feb = 01, etc.
-* `[year]`  - Int for the year (YYYY) you want to query data for .  Defaults to current year.
-* `[callback]` - optional callback` returns args: `err` response`.
-
-Sends a message to the Game Coordinator requesting data on leagues being played in the given month.  Provide a callback or listen for `leaguesInMonthResponse` for the Game Coordinator's response.  Requires the GC to be ready (listen for the `ready` event before calling).
-
 
 ## Events
 ### `ready`
@@ -211,118 +154,162 @@ Emitted when GC responds to the `matchDetailsRequest` method.
 
 See the [protobuf schema](https://github.com/SteamRE/SteamKit/blob/master/Resources/Protobufs/dota/dota_gcmessages.proto#L2250) for `matchData`'s object structure.
 
-### `hallOfFameData` (`week`, `featuredPlayers`, `featuredFarmer`, `hallOfFameResponse`)
-* `week` - Week the data is associated with.
-* `featuredPlayers` - Array of featured players for that week. `[{ accountId, heroId, averageScaledMetric, numGames }]`
-* `featuredFarmer` - Featured farmer for that week. `{ accountId, heroId, goldPerMin, matchId }`
-* `hallOfFameResponse` - Raw response object.
-
 Emitted when the GC responds to the `hallOfFameRequest` method.
 
-### `matchmakingStatsData` (`waitTimesByGroup`, `searchingPlayersByGroup`, `disabledGroups`, `matchmakingStatsResponse`)
-* `waitTimesByGroup` - Current average matchmaking waiting times, in seconds, per group.
-* `searchingPlayersByGroup` - Current players searching for matches per group.
-* `disabledGroups` - I don't know how the data is formatted here, I've only observed it to be zero.
-* `matchmakingStatsResponse` - Raw response object.
-
-Emitted when te GC response to the `matchmakingStatsRequest` method.  The array order dictates which matchmaking groups the figure belongs to, the groups are discoverable through `regions.txt` in Dota 2's game files.  Here are the groups at the time of this sentence being written (with unecessary data trimmed out):
-
-```
-    "USWest":               {"matchgroup": "0"},
-    "USEast":               {"matchgroup": "1"},
-    "Europe":               {"matchgroup": "2"},
-    "Singapore":            {"matchgroup": "3"},
-    "Shanghai":             {"matchgroup": "4"},
-    "Brazil":               {"matchgroup": "5"},
-    "Korea":                {"matchgroup": "6"},
-    "Austria":              {"matchgroup": "8"},
-    "Stockholm":            {"matchgroup": "7"},
-    "Australia":            {"matchgroup": "9"},
-    "SouthAfrica":          {"matchgroup": "10"},
-    "PerfectWorldTelecom":  {"matchgroup": "11"},
-    "PerfectWorldUnicom":   {"matchgroup": "12"}
-```
-
-### `practiceLobbyJoinResponse`(`result` `practiceLobbyJoinResponse`)
-* `result` - The result object from `practiceLobbyJoinResponse`.
-* `practiceLobbyJoinResponse` - The raw response object.
-
-Emitted when the GC responds to `createPracticeLobby` method; erroneously emits "DOTA_JOIN_RESULT_ALREADY_IN_GAME" though` so never trust it. vOv
-
-
-### `leaguesInMonthResponse` (`result`, `leaguesInMonthResponse`)
-* `result` - The result object from `leaguesInMonthResponse`.
-* `leaguesInMonthResponse` - The raw response object.
-
-Emitted when the GC responds to `leaguesInMonthRequest` method.
-
-Notes:
-
-* The `month` property is used to filter the data to the leagues which have matches scheduled in the given month, however the `schedule` object contains schedules for a league's entire duration - i.e. before or after `month`.
-* `month` is also zero-aligned, so January = 0, Febuary = 1, March = 2, etc.
-* Not every participating team seems to be hooked up to Dota 2's team system, so there will be a few `{ teamId: 0 }` objects for some schedule blocks.
-
-The response object is visualized as follows:
+### `matchmakingStatsData` (`matchmakingStatsResponse`)
+* `matchmakingStatsResponse` - Raw response object. Example response below.
 
 ```
 {
-    eresult,            // EResult enum
-    month,              // Int representing which month this data represents.
-    leagues: [{         // An array of CMsgLeague objects
-        leagueId,       // ID of the league associated
-        schedule: [{    // An array of CMsgLeagueScheduleBlock objects
-            blockId,    // ID represending this block
-            startTime,  // Unix timestamp of a scheduled match (or group of matches)
-            finals,     // Boolean represending if this match is a final.
-            comment,    // Comment about this scheduled block - often the team names & position in bracket
-            teams: [{   // An array of CMsgLeagueScheduleBlockTeamInfo objects
-                teamId, // ID of the associated team
-                name,   // The teams name
-                tag,    // The teams tag
-                logo    // The teams logo
-            }]
-        }]
-    }]
+  "accountId": 137013074,
+  "globalStats": {
+    "playersOnline": 68971,
+    "serversOnline": 43433,
+    "playersSearching": 1179,
+    "serversAvailable": 24609,
+    "ongoingMatches": 3163,
+    "searchTimeAvg": 76109,
+    "searchStatistics": [
+      {
+        "gameType": 1032,
+        "searchTimeAvg": 181954,
+        "playersSearching": 304
+      },
+      {
+        "gameType": 264,
+        "searchTimeAvg": 250253,
+        "playersSearching": 137
+      },
+      {
+        "gameType": 520,
+        "searchTimeAvg": 71081,
+        "playersSearching": 678
+      },
+      {
+        "gameType": 2056,
+        "searchTimeAvg": 265412,
+        "playersSearching": 139
+      },
+      {
+        "gameType": 4104,
+        "searchTimeAvg": 104999,
+        "playersSearching": 444
+      },
+      {
+        "gameType": 8200,
+        "searchTimeAvg": 114322,
+        "playersSearching": 471
+      },
+      {
+        "gameType": 16392,
+        "searchTimeAvg": 247397,
+        "playersSearching": 137
+      },
+      {
+        "gameType": 131080,
+        "searchTimeAvg": 266804,
+        "playersSearching": 121
+      },
+      {
+        "gameType": 65544,
+        "searchTimeAvg": 192607,
+        "playersSearching": 141
+      },
+      {
+        "gameType": 262152,
+        "searchTimeAvg": 320319,
+        "playersSearching": 86
+      },
+      {
+        "gameType": 524296,
+        "searchTimeAvg": 370119,
+        "playersSearching": 94
+      },
+      {
+        "gameType": 32776,
+        "searchTimeAvg": 116619,
+        "playersSearching": 404
+      },
+      {
+        "gameType": 1048584,
+        "searchTimeAvg": 152285,
+        "playersSearching": 220
+      },
+      {
+        "gameType": 4194312,
+        "searchTimeAvg": 364245,
+        "playersSearching": 114
+      },
+      {
+        "gameType": 33554440,
+        "searchTimeAvg": 238510,
+        "playersSearching": 120
+      },
+      {
+        "gameType": 134217736,
+        "searchTimeAvg": 254603,
+        "playersSearching": 101
+      },
+      {
+        "gameType": 268435464,
+        "searchTimeAvg": 287695,
+        "playersSearching": 129
+      },
+      {
+        "gameType": 536870920,
+        "searchTimeAvg": 321225,
+        "playersSearching": 140
+      },
+      {
+        "gameType": 2097160,
+        "searchTimeAvg": 333849,
+        "playersSearching": 89
+      },
+      {
+        "gameType": 67108872,
+        "searchTimeAvg": 347291,
+        "playersSearching": 81
+      },
+      {
+        "gameType": 8388616,
+        "searchTimeAvg": 428836,
+        "playersSearching": 54
+      },
+      {
+        "gameType": 16777224,
+        "searchTimeAvg": 339377,
+        "playersSearching": 77
+      }
+    ],
+    "mainPostUrl": "http://media.steampowered.com/apps/csgo/blog/mainmenu/20130630115312u24715681.sha-f048e4d341e7c8a823c28d612312eccd644c2a2b",
+    "requiredAppidVersion": 13260,
+    "pricesheetVersion": 1397848880,
+    "twitchStreamsVersion": 2,
+    "activeTournamentEventid": 3,
+    "activeSurveyId": 0
+  },
+  "vacBanned": 0,
+  "ranking": {
+    "accountId": 137013074,
+    "rankId": 0,
+    "wins": 0
+  },
+  "commendation": {
+    "cmdFriendly": 0,
+    "cmdTeaching": 0,
+    "cmdLeader": 0
+  },
+  "medals": {
+    "medalTeam": 0,
+    "medalCombat": 0,
+    "medalWeapon": 0,
+    "medalGlobal": 0,
+    "medalArms": 0
+  }
 }
 ```
 
-## Enums
-### ServerRegion
-* `UNSPECIFIED: 0`
-* `USWEST: 1`
-* `USEAST: 2`
-* `EUROPE: 3`
-* `KOREA: 4`
-* `SINGAPORE: 5`
-* `AUSTRALIA: 7`
-* `STOCKHOLM: 8`
-* `AUSTRIA: 9`
-* `BRAZIL: 10`
-* `SOUTHAFRICA: 11`
-* `PERFECTWORLDTELECOM: 12`
-* `PERFECTWORLDUNICOM: 13`
-
-Use this to pass valid server region data to `createPracticeLobby`.
-
-### GameMode
-* `DOTA_GAMEMODE_NONE: 0` - None
-* `DOTA_GAMEMODE_AP: 1` - All Pick
-* `DOTA_GAMEMODE_CM: 2` - Captain's Mode
-* `DOTA_GAMEMODE_RD: 3` - Random Draft
-* `DOTA_GAMEMODE_SD: 4` - Single Draft
-* `DOTA_GAMEMODE_AR: 5` - All Random
-* `DOTA_GAMEMODE_INTRO: 6` - Unknown
-* `DOTA_GAMEMODE_HW: 7` - Diretide
-* `DOTA_GAMEMODE_REVERSE_CM: 8` - Reverse Captain's Mode
-* `DOTA_GAMEMODE_XMAS: 9` - The Greeviling
-* `DOTA_GAMEMODE_TUTORIAL: 10` - Tutorial
-* `DOTA_GAMEMODE_MO: 11` - Mid Only
-* `DOTA_GAMEMODE_LP: 12` - Least Played
-* `DOTA_GAMEMODE_POOL1: 13` - Limited Heroes
-* `DOTA_GAMEMODE_FH: 14` - Compendium
-* `DOTA_GAMEMODE_CUSTOM: 15` - Unknown
-
-Use this to pass valid game mode data to `createPracticeLobby`.
+Emitted when te GC response to the `matchmakingStatsRequest` method.
 
 ## Testing
 There is no automated test suite for node-dota2 (I've no idea how I'd make one for the stuff this does :o), however there the `test` directory does contain a Steam bot with commented-out dota2 methods; you can use this bot to test the library.
