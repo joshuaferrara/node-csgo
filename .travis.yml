@@ -1,5 +1,10 @@
 language: node_js
-node_js:
-  - "0.10"
-  - "0.8"
-  - "0.6"
+deploy: 
+  api_key: 
+    secure: G2xnNXZtmfp3XQ+18aBic7n0v4JkKsoGweEHm+GVXLPwNsBz5zHzr3PwgiPVXlrGjouPnrkXHs3TDk/siCi6XUZf11GPDQICgA8P2l3IhgLzVLeOgeVq2t8PUgP2ppBKhhFdT85NdMH7GKyNt5wq1Ywp0owb7fWXamDj1fwONHY=
+  email: scjosh2@gmail.com
+  provider: npm
+node_js: 
+- "0.10"
+- "0.8"
+- "0.6"
