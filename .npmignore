@@ -1,4 +1,4 @@
-test/config.js
-test/sentry
+example/config.js
+example/sentry
 node_modules
-test/node_modules
+example/node_modules
