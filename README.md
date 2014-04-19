@@ -32,65 +32,7 @@ Reports to Steam that you're playing Dota 2, and then initiates communication wi
 
 Tells Steam you were feeding.
 
-
-### Inventory
-#### setItemPositions(itemPositions)
-* `itemPositions` - An array of tuples (itemid, position).
-
-Attempts to move items within your inventory to the positions you set. Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### deleteItem(itemid)
-
-Attempts to delete an item. Requires the GC to be ready (listen for the `ready` event before calling).
-
-
-### Chat
-#### joinChat(channel, [type])
-* `channel` - A string for the channel name.
-* `[type]` - The type of the channel being joined.  Defaults to `dota2.DOTAChatChannelType_t.DOTAChannelType_Custom`.
-
-Joins a chat channel.  Listen for the `chatMessage` event for other people's chat messages.
-
-#### leaveChat(channel)
-* `channel` - A string for the channel name.
-
-Leaves a chat channel.
-
-#### sendMessage(channel, message)
-* `channel` - A string for the channel name.
-* `message` - The message you want to send.
-
-Sends a message to the specified chat channel, won't send if you're not in the channel you try to send to.
-
-### Community
-#### profileRequest(accountId, requestName, [callback])
-* `accountId` - Account ID (lower 32-bits of a 64-bit Steam ID) of the user whose passport data you wish to view.
-* `requestName` - Boolean, whether you want the GC to return the accounts current display name.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Sends a message to the Game Coordinator requesting `accountId`'s profile data. Provide a callback or listen for `profileData` event for Game Coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### passportDataRequest(accountId, [callback])
-* `accountId` - Account ID (lower 32-bits of a 64-bit Steam ID) of the user whose passport data you wish to view.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Sends a message to the Game Coordinator requesting `accountId`'s passport data. Provide a callback or listen for `passportData` event for Game Coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
-
-#### hallOfFameRequest([week], [callback])
-* `[week]` - The week of which you wish to know the Hall of Fame members; will return latest week if omitted.  Weeks also randomly start at 2233 for some reason, valf please.
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Sends a message to the Game Coordinator requesting the Hall of Fame data for `week`. Provide a callback or listen for the `hallOfFameData` event for the Game Coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
-
-
 ### Matches
-#### matchDetailsRequest(matchId, [callback])
-* `matchId` - The matches ID
-* `[callback]` - optional callback, returns args: `err, response`.
-
-Sends a message to the Game Coordinator requesting `matchId`'s match details. Provide a callback or listen for `matchData` event for Game Coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
-
-Note:  There is a server-side rate-limit of 100 requests per 24 hours on this method.
 
 #### matchmakingStatsRequest()
 
@@ -102,59 +44,6 @@ Emitted when the GC is ready to receive messages.  Be careful not to declare ano
 
 ### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
-
-
-### `chatMessage` (`channel`, `senderName`, `message`, `chatObject`)
-* `channel` - Channel name.
-* `senderName` - Persona name of user who sent message.
-* `message` - Wot u think?
-* `chatObject` - The raw chat object to do with as you wish.
-
-Emitted for chat messages received from Dota 2 chat channels
-
-### `guildOpenPartyData` (`guildId`, `openParties`)
-* `guildId` - ID of the guild.
-* `openParties` - Array containing information about open guild parties.  Each object has the following properties:
-* * `partyId` - Unique ID of the party.
-* * `member_account_ids` - Array of account ids.
-* * `time_created` - Something about Back to the Future.
-* * `description` - A user-inputted string.  Do not trust.
-
-Emitted for each guild the bot's account is a member of, containing information on open parties for each guild.  Also exposes guildId's, which is handy.
-
-### `guildInvite` (`guildId`, `guildName`, `inviter`, `guildInviteDataObject`)
-* `guildId` - ID of the guild.
-* `guildName` - Name of the guild.
-* `inviter` - Account ID of user whom invited you.
-* `guildInviteDataObject` - The raw guildInviteData object to do with as you wish.
-
-You can respond with `cancelInviteToGuild` or `setGuildAccountRole`.
-
-### `profileData` (`accountId`, `profileData`)
-* `accountId` - Account ID whom the data is associated with.
-* `profileData` - The raw profile data object.
-
-Emitted when GC responds to the `profileRequest` method.
-
-See the [protobuf schema](https://github.com/SteamRE/SteamKit/blob/master/Resources/Protobufs/dota/dota_gcmessages.proto#2261) for `profileData`'s object structure.
-
-### `passportData` (`accountId`, `passportData`)
-* `accountId` - Account ID whom the passport belongs to.
-* `passportData` - The raw passport data object.
-
-Emitted when GC responds to the `passportDataRequest` method.
-
-See the [protobuf schema](https://github.com/SteamRE/SteamKit/blob/master/Resources/Protobufs/dota/dota_gcmessages.proto#L2993) for `passportData`'s object structure.
-
-### `matchData` (`matchId`, `matchData`)
-* `matchId` - Match ID whom the data is associatd with.
-* `matchData` - The raw match details data object.
-
-Emitted when GC responds to the `matchDetailsRequest` method.
-
-See the [protobuf schema](https://github.com/SteamRE/SteamKit/blob/master/Resources/Protobufs/dota/dota_gcmessages.proto#L2250) for `matchData`'s object structure.
-
-Emitted when the GC responds to the `hallOfFameRequest` method.
 
 ### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.

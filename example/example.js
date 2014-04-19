@@ -3,34 +3,32 @@ var steam = require("steam"),
     fs = require("fs"),
     csgo = require("../"),
     bot = new steam.SteamClient(),
-    CSGO = new csgo.CSGOClient(bot, true);
+    CSGO = new csgo.CSGOClient(bot, false);
 
 global.config = require("./config");
 
-/* Steam logic */
 var onSteamLogOn = function onSteamLogOn(){
-        bot.setPersonaState(steam.EPersonaState.Busy); // to display your bot's status as "Online"
+        bot.setPersonaState(steam.EPersonaState.Busy); // to display your bot's status as "Busy"
         bot.setPersonaName(config.steam_name); // to change its nickname
         util.log("Logged on.");
 
         CSGO.launch();
         CSGO.on("ready", function() {
-            console.log("Node-csgo ready.");
+            util.log("node-csgo ready.");
 
-            function requestData() {
-                CSGO.matchmakingStatsRequest();
-                setTimeout(requestData, 5000);
-            }
-            requestData();
-            
+            CSGO.matchmakingStatsRequest()
             CSGO.on("matchmakingStatsData", function(matchmakingStatsResponse) {
-                //console.log(JSON.stringify(matchmakingStatsResponse, null, 2));
-                console.log("Avg. Wait Time: " + matchmakingStatsResponse.globalStats.searchTimeAvg);
+                util.log("Avg. Wait Time: " + matchmakingStatsResponse.globalStats.searchTimeAvg);
+                util.log("Players Online: " + matchmakingStatsResponse.globalStats.playersOnline);
+                util.log("Players Searching: " + matchmakingStatsResponse.globalStats.playersSearching);
+                util.log("Servers Online: " + matchmakingStatsResponse.globalStats.serversOnline);
+                util.log("Servers Available: " + matchmakingStatsResponse.globalStats.serversAvailable);
+                util.log("Matches in Progress: " + matchmakingStatsResponse.globalStats.ongoingMatches);
             });
         });
 
         CSGO.on("unready", function onUnready(){
-            console.log("Node-csgo unready.");
+            util.log("node-csgo unready.");
         });
 
         CSGO.on("unhandled", function(kMsg) {
@@ -56,7 +54,6 @@ var onSteamLogOn = function onSteamLogOn(){
         });
     };
 
-// Login, only passing authCode if it exists
 var logOnDetails = {
     "accountName": config.steam_user,
     "password": config.steam_pass,
