@@ -1,0 +1,3 @@
+protoc --descriptor_set_out=base_gcmessages.desc --include_imports --proto_path=/root/CSGOGCStatus/node_modules/dota2/generated/ /root/CSGOGCStatus/node_modules/dota2/generated/base_gcmessages.proto
+protoc --descriptor_set_out=gcsdk_gcmessages.desc --include_imports --proto_path=/root/CSGOGCStatus/node_modules/dota2/generated/ /root/CSGOGCStatus/node_modules/dota2/generated/gcsdk_gcmessages.proto
+protoc --descriptor_set_out=cstrike15_gcmessages.desc --include_imports --proto_path=/root/CSGOGCStatus/node_modules/dota2/generated/ /root/CSGOGCStatus/node_modules/dota2/generated/cstrike15_gcmessages.proto

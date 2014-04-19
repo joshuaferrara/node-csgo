@@ -1,0 +1,34 @@
+{
+  "name": "csgo",
+  "version": "0.0.1",
+  "dependencies": {
+    "protobuf": "*",
+    "deferred": "*"
+  },
+  "peerDependencies": {
+    "steam": ">= 0.6.0"
+  },
+  "readmeFilename": "README.md",
+  "description": "A node-steam plugin for CS:GO.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joshuaferrara/node-csgo.git"
+  },
+  "keywords": [
+    "steam",
+    "valve",
+    "csgo"
+  ],
+  "author": {
+    "name": "Joshua Ferrara"
+  },
+  "license": "MIT",
+  "readme": "node-csgo",
+  "bugs": {
+    "url": "https://github.com/joshuaferrara/node-csgo/issues"
+  },
+  "homepage": "https://github.com/joshuaferrara/node-csgo",
+  "_id": "csgo@0.0.1",
+  "_from": "csgo@"
+}
