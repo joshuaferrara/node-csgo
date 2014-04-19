@@ -134,9 +134,4 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
 
 CSGO.CSGOClient = CSGOClient;
 
-//require("./handlers/inventory");
-//require("./handlers/chat");
-//require("./handlers/guild");
-//require("./handlers/community");
 require("./handlers/match");
-//require("./handlers/lobbies");
