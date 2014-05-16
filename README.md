@@ -38,7 +38,7 @@ Tells Steam you were feeding.
 
 #### matchmakingStatsRequest()
 
-Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the Game Coordinator's response (cannot take a callback because of Steam's backend, or RJackson's incompetence; not sure which). Rqeuired the GC to be ready (listen for the `ready` event before calling).
+Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the Game Coordinator's response. Require the GC to be ready (listen for the `ready` event before calling).
 
 ## Events
 ### `ready`
@@ -200,10 +200,10 @@ Emitted when the connection status to the GC changes, and renders the library un
 }
 ```
 
-Emitted when te GC response to the `matchmakingStatsRequest` method.
+Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
 
 ## Testing
-There is no automated test suite for node-dota2 (I've no idea how I'd make one for the stuff this does :o), however there the `test` directory does contain a Steam bot with commented-out dota2 methods; you can use this bot to test the library.
+There is no automated test suite for node-csgo, however there the `test` directory does contain a Steam bot with commented-out dota2 methods; you can use this bot to test the library.
 
 ### Setting up
 * `npm install` in the repository root.
