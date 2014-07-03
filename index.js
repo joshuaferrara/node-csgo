@@ -20,7 +20,6 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
 
   var self = this;
   this._client.on("fromGC", function fromGC(app, type, message, callback) {
-    /* Routes messages from Game Coordinator to their handlers. */
     callback = callback || null;
 
     var kMsg = type & ~protoMask;
@@ -42,7 +41,7 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
   this._sendClientHello = function() {
     if (self.debug) util.log("Sending ClientHello");
     if (!self._client) {
-      util.log("Where the fuck is _client?");
+      util.log("Client went missing...");
     }
     else {
       self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), gcsdk_gcmessages.CMsgClientHello.serialize({}));
@@ -53,13 +52,12 @@ util.inherits(CSGOClient, EventEmitter);
 
 require("./generated/messages");
 
-// Expose enums
 CSGOClient.prototype.ServerRegion = CSGO.ServerRegion;
 CSGOClient.prototype.GameMode = CSGO.GameMode;
 
 // Methods
 CSGOClient.prototype.launch = function() {
-  /* Reports to Steam that we are running Dota 2. Initiates communication with GC with EMsgGCClientHello */
+  /* Reports to Steam that we are running Counter-Strike: Global Offensive. Initiates communication with GC with EMsgGCClientHello */
   if (this.debug) util.log("Launching CS:GO");
   this._client.gamesPlayed([this._appid]);
 
