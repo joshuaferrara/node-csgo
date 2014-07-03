@@ -12,7 +12,7 @@ Some information below is related to [node-dota2](https://github.com/RJacksonm1/
 
 A node-steam plugin for Counter-Strike: Global Offensive.
 
-Based on [node-dota2](https://github.com/RJacksonm1/node-dota2)
+Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](https://github.com/RJacksonm1/)
 
 ## Initializing
 Parameters:
