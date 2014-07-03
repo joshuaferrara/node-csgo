@@ -1,7 +1,9 @@
 node-csgo
 ========
 
-[![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
+Main Build Server: [![Build Status](http://107.161.158.17:8080/job/node-csgo/badge/icon)](http://107.161.158.17:8080/job/node-csgo/)
+
+Backup Build Server: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 
 [![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
 
