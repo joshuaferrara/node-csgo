@@ -41,7 +41,7 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
   this._sendClientHello = function() {
     if (self.debug) util.log("Sending ClientHello");
     if (!self._client) {
-      util.log("Client went missing...");
+      util.log("Client went missing");
     }
     else {
       self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), gcsdk_gcmessages.CMsgClientHello.serialize({}));
