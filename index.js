@@ -15,7 +15,7 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
   this._client = steamClient;
   this._appid = 730;
   this.chatChannels = []; // Map channel names to channel data.
-  this._gcReady = false,
+  this._gcReady = false;
   this._gcClientHelloIntervalId = null;
 
   var self = this;
