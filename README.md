@@ -28,17 +28,17 @@ All methods require the SteamClient instance to be logged on.
 ### Steam
 #### launch()
 
-Reports to Steam that you're playing Dota 2, and then initiates communication with the Game Coordinator.
+Reports to Steam that you're playing Counter-Strike: Global Offensive, and then initiates communication with the Game Coordinator.
 
 #### exit()
 
-Tells Steam you were feeding.
+Tells Steam that you are not playing CS:GO.
 
 ### Matches
 
 #### matchmakingStatsRequest()
 
-Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the Game Coordinator's response. Require the GC to be ready (listen for the `ready` event before calling).
+Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
 ## Events
 ### `ready`
@@ -203,12 +203,4 @@ Emitted when the connection status to the GC changes, and renders the library un
 Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
 
 ## Testing
-There is no automated test suite for node-csgo, however there the `test` directory does contain a Steam bot with commented-out dota2 methods; you can use this bot to test the library.
-
-### Setting up
-* `npm install` in the repository root.
-* `npm install` in the `test` directory.
-* Copy `config_SAMPLE.js` to `config.js` and edit appropriately.
-* Create a blank file named 'sentry' in the tests directory.
-* Attempt to log-in, you'll receive Error 63 - which means you need to provide a Steam Guard code.
-* Set the Steam Guard code in `config.js` and launch again.
+There is no automated test suite for node-csgo, however the `example` directory does contain a steam bot with an example method to grab the GC status; you can use this bot to test the library.
