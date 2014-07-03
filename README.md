@@ -1,7 +1,7 @@
 node-csgo
 ========
 
-Main Build Server: [![Build Status](http://107.161.158.17:8080/job/node-csgo/badge/icon)](http://107.161.158.17:8080/job/node-csgo/)
+Main Build Server: [![Build Status](http://jenkins.joshua-ferrara.com/job/node-csgo/badge/icon)](http://jenkins.joshua-ferrara.com/job/node-csgo/)
 
 Backup Build Server: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 
