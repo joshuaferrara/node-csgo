@@ -3,6 +3,8 @@ node-csgo
 
 [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 
+[![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
+
 Some information below is related to [node-dota2](https://github.com/RJacksonm1/node-dota2). I will update this file as I make changes.
 ---
 
