@@ -1,9 +1,10 @@
 {
   "name": "csgo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "protobuf": "*",
-    "deferred": "*"
+    "deferred": "*",
+    "big-number": "*"
   },
   "peerDependencies": {
     "steam": ">= 0.6.0"
@@ -29,6 +30,6 @@
     "url": "https://github.com/joshuaferrara/node-csgo/issues"
   },
   "homepage": "https://github.com/joshuaferrara/node-csgo",
-  "_id": "csgo@0.0.2",
+  "_id": "csgo@0.0.4",
   "_from": "csgo@"
 }

@@ -15,9 +15,28 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
 
   if (this.debug) util.log("Sending matchmaking stats request");
 
+  
+
   var payload = csgo_gcmessages.CMsgGCCStrike15_v2_MatchmakingClient2GCHello.serialize({});
+  console.log(JSON.stringify(payload));
   this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello | protoMask), payload);
 };
+
+CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) util.log("GC not ready")
+    return null;
+  }
+  
+  if (this.debug) util.log("Sending player profile request");
+  
+  var payload = csgo_gcmessages.CMsgGCCStrike15_v2_ClientRequestPlayersProfile.serialize({
+    accountId: accountId
+  });
+
+  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload, callback);
+}
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
@@ -28,3 +47,10 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello] = functi
   if (this.debug) util.log("Received matchmaking stats");
   this.emit("matchmakingStatsData", matchmakingStatsResponse);
 };
+
+handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_PlayersProfile] = function onPlayerProfileResponse(message) {
+  var playerProfileResponse = csgo_gcmessages.CMsgGCCStrike15_v2_PlayersProfile.parse(message);
+  
+  if (this.debug) util.log("Received player profile");
+  this.emit("playerProfile", playerProfileResponse);
+}

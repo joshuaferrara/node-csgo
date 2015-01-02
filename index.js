@@ -6,7 +6,9 @@ var EventEmitter = require('events').EventEmitter,
     gcsdk_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/gcsdk_gcmessages.desc")),
     csgo_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/cstrike15_gcmessages.desc")),
     protoMask = 0x80000000,
+    bignumber = require("bignumber.js"),
     CSGO = exports;
+    
 
 var CSGOClient = function CSGOClient(steamClient, debug) {
   EventEmitter.call(this);
@@ -54,6 +56,14 @@ require("./generated/messages");
 
 CSGOClient.prototype.ServerRegion = CSGO.ServerRegion;
 CSGOClient.prototype.GameMode = CSGO.GameMode;
+
+CSGOClient.prototype.ToAccountID = function(accid){
+  return bignumber(accid).minus('76561197960265728')-0;
+};
+
+CSGOClient.prototype.ToSteamID = function(accid){
+  return bignumber(accid).plus('76561197960265728')+"";
+};
 
 // Methods
 CSGOClient.prototype.launch = function() {

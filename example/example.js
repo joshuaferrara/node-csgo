@@ -3,16 +3,24 @@ var steam = require("steam"),
     fs = require("fs"),
     csgo = require("../"),
     bot = new steam.SteamClient(),
-    CSGO = new csgo.CSGOClient(bot, false);
-
-global.config = require("./config");
+    CSGO = new csgo.CSGOClient(bot, false),
+    readlineSync = require("readline-sync");
 
 var onSteamLogOn = function onSteamLogOn(){
         bot.setPersonaState(steam.EPersonaState.Busy); // to display your bot's status as "Busy"
-        bot.setPersonaName(config.steam_name); // to change its nickname
+        //bot.setPersonaName(config.steam_name); // to change its nickname
         util.log("Logged on.");
 
+        util.log("Current SteamID64: " + bot.steamID);
+        util.log("Account ID: " + CSGO.ToAccountID(bot.steamID));
+
         CSGO.launch();
+        
+        CSGO.on("unhandled", function(message) {
+           console.log("Unhandled msg")
+           console.log(message);
+        });
+        
         CSGO.on("ready", function() {
             util.log("node-csgo ready.");
 
@@ -24,6 +32,13 @@ var onSteamLogOn = function onSteamLogOn(){
                 util.log("Servers Online: " + matchmakingStatsResponse.globalStats.serversOnline);
                 util.log("Servers Available: " + matchmakingStatsResponse.globalStats.serversAvailable);
                 util.log("Matches in Progress: " + matchmakingStatsResponse.globalStats.ongoingMatches);
+                console.log(matchmakingStatsResponse);
+                
+                CSGO.playerProfileRequest(CSGO.ToAccountID("76561197992172465")); //
+                CSGO.on("playerProfile", function(profile) {
+                   console.log("Profile");
+                   console.log(JSON.stringify(profile, null, 2));
+                });
             });
         });
 
@@ -54,11 +69,15 @@ var onSteamLogOn = function onSteamLogOn(){
         });
     };
 
+var username = readlineSync.question('Username: ');
+var password = readlineSync.question('Password: ', {noEchoBack: true});
+var authCode = readlineSync.question('AuthCode: ');
+
 var logOnDetails = {
-    "accountName": config.steam_user,
-    "password": config.steam_pass,
+    "accountName": username,
+    "password": password,
 };
-if (config.steam_guard_code) logOnDetails.authCode = config.steam_guard_code;
+if (authCode != "") logOnDetails.authCode = authCode;
 var sentry = fs.readFileSync('sentry');
 if (sentry.length) logOnDetails.shaSentryfile = sentry;
 bot.logOn(logOnDetails);

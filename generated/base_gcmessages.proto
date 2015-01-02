@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
@@ -106,6 +109,7 @@ message CSOEconGameAccountClient {
 	optional uint32 preview_item_def = 8 [default = 0];
 	optional bool made_first_purchase = 9 [default = false];
 	optional bool eligible_for_community_market = 10;
+	optional uint32 mission_refuse_allowed = 11;
 }
 
 message CSOItemCriteriaCondition {
@@ -239,19 +243,15 @@ message CSOEconClaimCode {
 
 message CMsgStoreGetUserData {
 	optional fixed32 price_sheet_version = 1;
+	optional int32 currency = 2;
 }
 
 message CMsgStoreGetUserDataResponse {
 	optional int32 result = 1;
-	optional int32 currency = 2;
-	optional string country = 3;
+	optional int32 currency_deprecated = 2;
+	optional string country_deprecated = 3;
 	optional fixed32 price_sheet_version = 4;
-	optional uint64 experiment_data = 5 [default = 0];
-	optional int32 featured_item_idx = 6;
-	optional bool show_hat_descriptions = 7 [default = true];
 	optional bytes price_sheet = 8;
-	optional int32 default_item_sort = 9 [default = 0];
-	repeated uint32 popular_items = 10;
 }
 
 message CMsgUpdateItemSchema {
