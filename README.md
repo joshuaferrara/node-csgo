@@ -1,9 +1,7 @@
 node-csgo
 ========
 
-Main Build Server: [![Build Status](http://jenkins.joshua-ferrara.com/job/node-csgo/badge/icon)](http://jenkins.joshua-ferrara.com/job/node-csgo/)
-
-Backup Build Server: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
+Build Status: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 
 [![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
 
@@ -29,7 +27,7 @@ var Steam = require('steam'),
 ## Methods
 All methods require the SteamClient instance to be logged on.
 
-### Steam
+### CSGO
 #### launch()
 
 Reports to Steam that you're playing Counter-Strike: Global Offensive, and then initiates communication with the Game Coordinator.
@@ -38,20 +36,36 @@ Reports to Steam that you're playing Counter-Strike: Global Offensive, and then 
 
 Tells Steam that you are not playing CS:GO.
 
+#### ToAccountId(steamId)
+
+Converts a 64 bit steam ID to an account ID.
+
+#### ToSteamId(accountId)
+
+Converts an account ID to a 64 bit steam ID.
+
 ### Matches
 
 #### matchmakingStatsRequest()
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
-## Events
-### `ready`
+### Player Info
+
+#### playerProfileRequest(accountId)
+
+`accountId` is the player's account ID (A player's SteamID64 can be converted to an account ID with `CSGO.ToAccountId(steamid)`).
+
+Requests a player's profile from the game coordinator. The player must be online and playing CS:GO. Listen for the `playerProfile` event for the game coordinator's response.
+
+### Events
+#### `ready`
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
 
-### `unready`
+#### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
 
-### `matchmakingStatsData` (`matchmakingStatsResponse`)
+#### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.
 
 ```
@@ -205,6 +219,44 @@ Emitted when the connection status to the GC changes, and renders the library un
 ```
 
 Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
+
+#### `playerInfo`
+```{
+  "accountProfiles": [
+    {
+      "accountId": 31906737,
+      "ranking": {
+        "accountId": 31906737,
+        "rankId": 10,
+        "wins": 136
+      },
+      "commendation": {
+        "cmdFriendly": 3,
+        "cmdTeaching": 2,
+        "cmdLeader": 3
+      },
+      "medals": {
+        "medalTeam": 2,
+        "medalCombat": 2,
+        "medalWeapon": 2,
+        "medalGlobal": 1,
+        "medalArms": 2,
+        "displayItemsDefidx": [
+          896,
+          1318,
+          888,
+          1030,
+          1024,
+          1013,
+          874
+        ],
+        "featuredDisplayItemDefidx": 896
+      }
+    }
+  ]
+}```
+
+Emitted when the game coordinator responds to the `playerProfileRequest` method.
 
 ## Testing
 There is no automated test suite for node-csgo, however the `example` directory does contain a steam bot with an example method to grab the GC status; you can use this bot to test the library.
