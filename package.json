@@ -4,7 +4,7 @@
   "dependencies": {
     "protobuf": "*",
     "deferred": "*",
-    "big-number": "*"
+    "bignumber.js": "*"
   },
   "peerDependencies": {
     "steam": ">= 0.6.0"
