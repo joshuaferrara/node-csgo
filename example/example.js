@@ -3,7 +3,7 @@ var steam = require("steam"),
     fs = require("fs"),
     csgo = require("../"),
     bot = new steam.SteamClient(),
-    CSGO = new csgo.CSGOClient(bot, true),
+    CSGO = new csgo.CSGOClient(bot, false),
     readlineSync = require("readline-sync");
 
 var onSteamLogOn = function onSteamLogOn(){
