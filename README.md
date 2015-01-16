@@ -50,6 +50,7 @@ Converts an account ID to a 64 bit steam ID.
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
+<<<<<<< Updated upstream
 ### Player Info
 
 #### playerProfileRequest(accountId)
@@ -60,6 +61,14 @@ Requests a player's profile from the game coordinator. The player must be online
 
 ### Events
 #### `ready`
+=======
+#### requestRecentGames(accountId)
+
+Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
+
+## Events
+### `ready`
+>>>>>>> Stashed changes
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
 
 #### `unready`
@@ -254,9 +263,120 @@ Emitted when the game coordinator responds to the `matchmakingStatsRequest` meth
       }
     }
   ]
-}```
+}
+```
 
 Emitted when the game coordinator responds to the `playerProfileRequest` method.
+
+### `matchList`
+
+```
+{
+  "msgrequestid": 9141,
+  "accountid": 137013074,
+  "servertime": 1421436395,
+  "matches": [
+    {
+      "matchid": "3052384629647474702",
+      "matchtime": 1421377356,
+      "watchablematchinfo": {
+        "serverIp": 123,
+        "tvPort": 1163334677,
+        "tvSpectators": 1,
+        "clDecryptdataKeyPub": "9068150129701000225"
+      },
+      "roundstats": {
+        "reservationid": "3052389598924636197",
+        "reservation": {
+          "accountIds": [
+            76764980,
+            40140216,
+            18708851,
+            9146358,
+            84968273,
+            106960435,
+            37671978,
+            61347894,
+            137013074,
+            66568413
+          ],
+          "gameType": 1048584
+        },
+        "map": "http://replay123.valve.net/730/003052389598924636197_1163334677.dem.bz2",
+        "kills": [
+          25,
+          21,
+          22,
+          13,
+          17,
+          20,
+          20,
+          16,
+          18,
+          10
+        ],
+        "assists": [
+          5,
+          10,
+          6,
+          6,
+          5,
+          3,
+          7,
+          6,
+          6,
+          4
+        ],
+        "deaths": [
+          16,
+          18,
+          16,
+          16,
+          19,
+          19,
+          20,
+          18,
+          22,
+          20
+        ],
+        "scores": [
+          61,
+          60,
+          54,
+          45,
+          43,
+          58,
+          53,
+          48,
+          44,
+          34
+        ],
+        "matchResult": 1,
+        "teamScores": [
+          16,
+          8
+        ],
+        "matchDuration": 2164,
+        "mvps": [
+          5,
+          3,
+          4,
+          2,
+          2,
+          1,
+          3,
+          4,
+          0,
+          0
+        ]
+      }
+    },
+    [...]
+  ]
+}
+```
+
+Emitted when `requestRecentGames` is replied to.
 
 ## Testing
 There is no automated test suite for node-csgo, however the `example` directory does contain a steam bot with an example method to grab the GC status; you can use this bot to test the library.

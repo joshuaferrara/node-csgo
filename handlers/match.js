@@ -38,10 +38,25 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
   this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload, callback);
 }
 
+CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) util.log("GC not ready")
+    return null;
+  }
+  
+  if (this.debug) util.log("Sending recent match request with ID of " + accid);
+  
+  var payload = csgo_gcmessages.CMsgGCCStrike15_v2_MatchListRequestRecentUserGames.serialize({
+    accountid: accid
+  });
+
+  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames | protoMask), payload, callback);
+}
+
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello] = function onMatchmakingStatsResponse(message) {
-  // Is not Job ID based - can't do callbacks.
   var matchmakingStatsResponse = csgo_gcmessages.CMsgGCCStrike15_v2_MatchmakingGC2ClientHello.parse(message);
 
   if (this.debug) util.log("Received matchmaking stats");
@@ -53,4 +68,11 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_PlayersProfile] = function onPlayer
   
   if (this.debug) util.log("Received player profile");
   this.emit("playerProfile", playerProfileResponse);
+}
+
+handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
+  var matchListResponse = csgo_gcmessages.CMsgGCCStrike15_v2_MatchList.parse(message);
+  
+  if (this.debug) util.log("Received match list");
+  this.emit("matchList", matchListResponse);
 }

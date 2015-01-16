@@ -3,12 +3,11 @@ var steam = require("steam"),
     fs = require("fs"),
     csgo = require("../"),
     bot = new steam.SteamClient(),
-    CSGO = new csgo.CSGOClient(bot, false),
+    CSGO = new csgo.CSGOClient(bot, true),
     readlineSync = require("readline-sync");
 
 var onSteamLogOn = function onSteamLogOn(){
-        bot.setPersonaState(steam.EPersonaState.Busy); // to display your bot's status as "Busy"
-        //bot.setPersonaName(config.steam_name); // to change its nickname
+        bot.setPersonaState(steam.EPersonaState.Busy);
         util.log("Logged on.");
 
         util.log("Current SteamID64: " + bot.steamID);
@@ -38,6 +37,12 @@ var onSteamLogOn = function onSteamLogOn(){
                 CSGO.on("playerProfile", function(profile) {
                    console.log("Profile");
                    console.log(JSON.stringify(profile, null, 2));
+                });
+                
+                CSGO.requestRecentGames(137013074);
+                CSGO.on("matchList", function(list) {
+                   console.log("Match List");
+                   console.log(JSON.stringify(list, null, 2));
                 });
             });
         });
