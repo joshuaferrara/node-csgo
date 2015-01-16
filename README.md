@@ -50,6 +50,10 @@ Converts an account ID to a 64 bit steam ID.
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
+#### requestRecentGames(accountId)
+
+Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
+
 ### Player Info
 
 #### playerProfileRequest(accountId)
@@ -58,15 +62,8 @@ Sends a message to the Game Coordinator requesting some matchmaking stats. Liste
 
 Requests a player's profile from the game coordinator. The player must be online and playing CS:GO. Listen for the `playerProfile` event for the game coordinator's response.
 
-### Events
-#### `ready`
-=======
-#### requestRecentGames(accountId)
-
-Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
-
 ## Events
-### `ready`
+#### `ready`
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
 
 #### `unready`
