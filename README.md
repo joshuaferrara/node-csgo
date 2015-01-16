@@ -50,7 +50,6 @@ Converts an account ID to a 64 bit steam ID.
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
-<<<<<<< Updated upstream
 ### Player Info
 
 #### playerProfileRequest(accountId)
@@ -68,7 +67,6 @@ Requests a list of recent games for the given accountId. Listen for the `matchLi
 
 ## Events
 ### `ready`
->>>>>>> Stashed changes
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
 
 #### `unready`
@@ -229,8 +227,11 @@ Emitted when the connection status to the GC changes, and renders the library un
 
 Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
 
-#### `playerInfo`
-```{
+#### `playerInfo` (Response to `playerProfileRequest`)
+
+
+```
+{
   "accountProfiles": [
     {
       "accountId": 31906737,
@@ -268,7 +269,8 @@ Emitted when the game coordinator responds to the `matchmakingStatsRequest` meth
 
 Emitted when the game coordinator responds to the `playerProfileRequest` method.
 
-### `matchList`
+### `matchList` (Response to `requestRecentGames`)
+
 
 ```
 {
