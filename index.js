@@ -58,11 +58,11 @@ CSGOClient.prototype.ServerRegion = CSGO.ServerRegion;
 CSGOClient.prototype.GameMode = CSGO.GameMode;
 
 CSGOClient.prototype.ToAccountID = function(accid){
-  return bignumber(accid).minus('76561197960265728')-0;
+  return new bignumber(accid).minus('76561197960265728')-0;
 };
 
 CSGOClient.prototype.ToSteamID = function(accid){
-  return bignumber(accid).plus('76561197960265728')+"";
+  return new bignumber(accid).plus('76561197960265728')+"";
 };
 
 // Methods

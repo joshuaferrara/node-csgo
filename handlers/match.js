@@ -32,7 +32,8 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
   if (this.debug) util.log("Sending player profile request");
   
   var payload = csgo_gcmessages.CMsgGCCStrike15_v2_ClientRequestPlayersProfile.serialize({
-    accountId: accountId
+    accountId: accountId,
+    requestLevel: 32
   });
 
   this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload, callback);
