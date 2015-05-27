@@ -512,3 +512,4 @@ message CMsgNotificationOfSuspiciousActivity {
 	optional uint32 appid = 2;
 	optional .CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances = 3;
 }
+
