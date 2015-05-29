@@ -72,7 +72,7 @@ Emitted when the connection status to the GC changes, and renders the library un
 #### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.
 
-```
+```json
 {
   "accountId": 137013074,
   "globalStats": {
@@ -227,38 +227,38 @@ Emitted when the game coordinator responds to the `matchmakingStatsRequest` meth
 #### `playerInfo` (Response to `playerProfileRequest`)
 
 
-```
+```json
 {
   "accountProfiles": [
     {
-      "accountId": 31906737,
+      "accountId": 9716014,
       "ranking": {
-        "accountId": 31906737,
-        "rankId": 10,
-        "wins": 136
+        "accountId": 9716014,
+        "rankId": 15,
+        "wins": 51
       },
       "commendation": {
-        "cmdFriendly": 3,
-        "cmdTeaching": 2,
-        "cmdLeader": 3
+        "cmdFriendly": 22,
+        "cmdTeaching": 18,
+        "cmdLeader": 23
       },
       "medals": {
         "medalTeam": 2,
-        "medalCombat": 2,
-        "medalWeapon": 2,
-        "medalGlobal": 1,
+        "medalCombat": 3,
+        "medalWeapon": 3,
+        "medalGlobal": 3,
         "medalArms": 2,
         "displayItemsDefidx": [
-          896,
-          1318,
-          888,
-          1030,
+          874,
+          1316,
+          1028,
           1024,
-          1013,
-          874
+          1014
         ],
-        "featuredDisplayItemDefidx": 896
-      }
+        "featuredDisplayItemDefidx": 874
+      },
+      "playerLevel": 1,
+      "playerCurXp": 327681600
     }
   ]
 }
@@ -269,7 +269,7 @@ Emitted when the game coordinator responds to the `playerProfileRequest` method.
 ### `matchList` (Response to `requestRecentGames`)
 
 
-```
+```json
 {
   "msgrequestid": 9141,
   "accountid": 137013074,
