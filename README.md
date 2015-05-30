@@ -36,11 +36,11 @@ Reports to Steam that you're playing Counter-Strike: Global Offensive, and then 
 
 Tells Steam that you are not playing CS:GO.
 
-#### ToAccountId(steamId)
+#### ToAccountID(steamId)
 
 Converts a 64 bit steam ID to an account ID.
 
-#### ToSteamId(accountId)
+#### ToSteamID(accountId)
 
 Converts an account ID to a 64 bit steam ID.
 
@@ -58,7 +58,7 @@ Requests a list of recent games for the given accountId. Listen for the `matchLi
 
 #### playerProfileRequest(accountId)
 
-`accountId` is the player's account ID (A player's SteamID64 can be converted to an account ID with `CSGO.ToAccountId(steamid)`).
+`accountId` is the player's account ID (A player's SteamID64 can be converted to an account ID with `CSGO.ToAccountID(steamid)`).
 
 Requests a player's profile from the game coordinator. The player must be online and playing CS:GO. Listen for the `playerProfile` event for the game coordinator's response.
 
@@ -224,7 +224,7 @@ Emitted when the connection status to the GC changes, and renders the library un
 
 Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
 
-#### `playerInfo` (Response to `playerProfileRequest`)
+#### `playerProfile` (Response to `playerProfileRequest`)
 
 
 ```json
