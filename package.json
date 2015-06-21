@@ -2,9 +2,9 @@
   "name": "csgo",
   "version": "0.0.8",
   "dependencies": {
-    "protobuf": "*",
+    "protobufjs": "*",
     "deferred": "*",
-    "bignumber.js": "2.0.3"
+    "bignumber.js": "^2.0.7"
   },
   "peerDependencies": {
     "steam": ">= 0.6.0"
