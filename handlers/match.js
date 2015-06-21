@@ -53,21 +53,21 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello] = function onMatchmakingStatsResponse(message) {
-  var matchmakingStatsResponse = schema.CMsgGCCStrike15_v2_MatchmakingGC2ClientHello.decode(message);
+  var matchmakingStatsResponse = protos.CMsgGCCStrike15_v2_MatchmakingGC2ClientHello.decode(message);
 
   if (this.debug) util.log("Received matchmaking stats");
   this.emit("matchmakingStatsData", matchmakingStatsResponse);
 };
 
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_PlayersProfile] = function onPlayerProfileResponse(message) {
-  var playerProfileResponse = schema.CMsgGCCStrike15_v2_PlayersProfile.decode(message);
+  var playerProfileResponse = protos.CMsgGCCStrike15_v2_PlayersProfile.decode(message);
 
   if (this.debug) util.log("Received player profile");
   this.emit("playerProfile", playerProfileResponse);
 }
 
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
-  var matchListResponse = schema.CMsgGCCStrike15_v2_MatchList.decode(message);
+  var matchListResponse = protos.CMsgGCCStrike15_v2_MatchList.decode(message);
 
   if (this.debug) util.log("Received match list");
   this.emit("matchList", matchListResponse);
