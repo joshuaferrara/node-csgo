@@ -42,7 +42,7 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
       util.log("Client went missing");
     }
     else {
-      self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), new protos.CMsgClientHello({}));
+      self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), (new protos.CMsgClientHello({})).toBuffer());
     }
   };
 };

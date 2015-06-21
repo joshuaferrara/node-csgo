@@ -14,7 +14,7 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
 
   var payload = new protos.CMsgGCCStrike15_v2_MatchmakingClient2GCHello({});
   console.log(JSON.stringify(payload));
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello | protoMask), payload);
+  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello | protoMask), payload.toBuffer());
 };
 
 CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
@@ -31,7 +31,7 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
     requestLevel: 32
   });
 
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload, callback);
+  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload.toBuffer(), callback);
 }
 
 CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
@@ -47,7 +47,7 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
     accountid: accid
   });
 
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames | protoMask), payload, callback);
+  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames | protoMask), payload.toBuffer(), callback);
 }
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
