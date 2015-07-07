@@ -1,14 +1,10 @@
 var EventEmitter = require('events').EventEmitter,
     fs = require("fs"),
     util = require("util"),
-    Schema = require('protobuf').Schema,
-    base_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/base_gcmessages.desc")),
-    gcsdk_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/gcsdk_gcmessages.desc")),
-    csgo_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/cstrike15_gcmessages.desc")),
+    protos = require("./protos"),
     protoMask = 0x80000000,
     bignumber = require("bignumber.js"),
     CSGO = exports;
-    
 
 var CSGOClient = function CSGOClient(steamClient, debug) {
   EventEmitter.call(this);
@@ -46,7 +42,7 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
       util.log("Client went missing");
     }
     else {
-      self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), gcsdk_gcmessages.CMsgClientHello.serialize({}));
+      self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), (new protos.CMsgClientHello({})).toBuffer());
     }
   };
 };
@@ -110,7 +106,7 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHa
 handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClientConnectionStatus(message) {
   /* Catch and handle changes in connection status, cuz reasons u know. */
 
-  var status = gcsdk_gcmessages.CMsgConnectionStatus.parse(message).status;
+  var status = protos.CMsgConnectionStatus.decode(message).status;
 
   switch (status) {
     case CSGO.GCConnectionStatus.GCConnectionStatus_HAVE_SESSION:
