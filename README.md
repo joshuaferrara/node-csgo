@@ -11,15 +11,15 @@ A node-steam plugin for Counter-Strike: Global Offensive.
 
 Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](https://github.com/RJacksonm1/)
 
-## Used by
+# Used by
 * [PopFlash](https://popflash.site/) - Alternative CS:GO matchmaking & PUG service.
 * [steamgaug.es](https://steamgaug.es/) - Matchmaking status info for CS:GO, TF2 & Dota 2. Also includes general steam status.
 
-## Requirements
+# Requirements
 * node-steam
 * CS:GO must be purchased on the account you sign in with.
 
-## Initializing
+# Initializing
 Parameters:
 * `steamClient` - Pass a SteamClient instance to use to send & receive GC messages.
 * `debug` - A boolean noting whether to print information about operations to console.
@@ -31,52 +31,52 @@ var Steam = require('steam'),
     CSGO = new csgo.CSGOClient(steamClient, true);
 ```
 
-## Methods
+# Methods
 All methods require the SteamClient instance to be logged on.
 
-### CSGO
-#### launch()
+## CSGO
+### `launch()`
 
 Reports to Steam that you're playing Counter-Strike: Global Offensive, and then initiates communication with the Game Coordinator.
 
-#### exit()
+### `exit()`
 
 Tells Steam that you are not playing CS:GO.
 
-#### ToAccountID(steamId)
+### `ToAccountID(steamId)`
 
 Converts a 64 bit steam ID to an account ID.
 
-#### ToSteamID(accountId)
+### `ToSteamID(accountId)`
 
 Converts an account ID to a 64 bit steam ID.
 
-### Matches
+## Matches
 
-#### matchmakingStatsRequest()
+### `matchmakingStatsRequest()`
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
-#### requestRecentGames(accountId)
+### `requestRecentGames(accountId)`
 
 Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
 
-### Player Info
+## Player Info
 
-#### playerProfileRequest(accountId)
+### `playerProfileRequest(accountId)`
 
 `accountId` is the player's account ID (A player's SteamID64 can be converted to an account ID with `CSGO.ToAccountID(steamid)`).
 
 Requests a player's profile from the game coordinator. The player must be online and playing CS:GO. Listen for the `playerProfile` event for the game coordinator's response.
 
-## Events
-#### `ready`
+# Events
+### `ready`
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
 
-#### `unready`
+### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
 
-#### `matchmakingStatsData` (`matchmakingStatsResponse`)
+### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.
 
 ```json
@@ -231,7 +231,7 @@ Emitted when the connection status to the GC changes, and renders the library un
 
 Emitted when the game coordinator responds to the `matchmakingStatsRequest` method.
 
-#### `playerProfile` (Response to `playerProfileRequest`)
+### `playerProfile` (Response to `playerProfileRequest`)
 
 
 ```json
@@ -273,7 +273,7 @@ Emitted when the game coordinator responds to the `matchmakingStatsRequest` meth
 
 Emitted when the game coordinator responds to the `playerProfileRequest` method.
 
-### `matchList` (Response to `requestRecentGames`)
+## `matchList` (Response to `requestRecentGames`)
 
 
 ```json
