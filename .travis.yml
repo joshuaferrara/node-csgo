@@ -3,9 +3,8 @@ deploy:
   provider: npm
   email: scjosh2@gmail.com
   api_key:
-    secure: oRxIBvd9As3QGfgwjFZVbAaYAelVXy4LWDMRwK0oXOeDkeOXiAdk26AY47l6VLc0XoLvipkpNkJ3Rc68pDBb+3Pny1QDVW8U6gPh7IuM729NLcvisciR/vF/rWmFZnTKNXu6ZDUqNJrZxzOd6RHa6Z4y9WdiFjDw+rdYOQYJh70=
+    secure: k+o224lyzxltonHz8EGPkVjzBDL0aIy8vGABqSCAUCb2ghXSmhO4lPvY+k7FTCqROda3d5to4smG3m+45r5aed7S9s8hsFQyrQD6cmtsfakoJTyIMET5WdlmKILjkEhJVEHi+xEkAmr72dEYT4zfp6Iq1U046zhwqMI/YJc4ALg=
   on:
-    tags: true
     repo: joshuaferrara/node-csgo
 node_js:
 - '0.12'
