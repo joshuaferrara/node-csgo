@@ -1,7 +1,8 @@
 node-csgo
 ========
 
-Build Status: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
+[![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
+[![Code Climate](https://codeclimate.com/github/joshuaferrara/gitroulette/badges/gpa.svg)](https://codeclimate.com/github/joshuaferrara/gitroulette)
 
 [![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
 
