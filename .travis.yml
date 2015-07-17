@@ -5,7 +5,6 @@ deploy:
   api_key:
     secure: oRxIBvd9As3QGfgwjFZVbAaYAelVXy4LWDMRwK0oXOeDkeOXiAdk26AY47l6VLc0XoLvipkpNkJ3Rc68pDBb+3Pny1QDVW8U6gPh7IuM729NLcvisciR/vF/rWmFZnTKNXu6ZDUqNJrZxzOd6RHa6Z4y9WdiFjDw+rdYOQYJh70=
   on:
-    tags: true
     repo: joshuaferrara/node-csgo
 node_js:
 - '0.12'
