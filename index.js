@@ -1,5 +1,4 @@
 var EventEmitter = require('events').EventEmitter,
-    fs = require("fs"),
     util = require("util"),
     protos = require("./protos"),
     protoMask = 0x80000000,
@@ -21,7 +20,9 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
     callback = callback || null;
 
     var kMsg = type & ~protoMask;
-    if (self.debug) util.log("CS:GO fromGC: " + [app, kMsg].join(", "));  // TODO:  Turn type-protoMask into key name.
+    if (self.debug) {
+     util.log("CS:GO fromGC: " + [app, kMsg].join(", "));  // TODO:  Turn type-protoMask into key name.
+    }
 
     if (kMsg in self._handlers) {
       if (callback) {
@@ -37,7 +38,9 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
   });
 
   this._sendClientHello = function() {
-    if (self.debug) util.log("Sending ClientHello");
+    if (self.debug) {
+      util.log("Sending ClientHello");
+    }
     if (!self._client) {
       util.log("Client went missing");
     }
@@ -64,7 +67,9 @@ CSGOClient.prototype.ToSteamID = function(accid){
 // Methods
 CSGOClient.prototype.launch = function() {
   /* Reports to Steam that we are running Counter-Strike: Global Offensive. Initiates communication with GC with EMsgGCClientHello */
-  if (this.debug) util.log("Launching CS:GO");
+  if (this.debug) {
+    util.log("Launching CS:GO");
+  }
   this._client.gamesPlayed([this._appid]);
 
   // Keep knocking on the GCs door until it accepts us.
@@ -73,7 +78,9 @@ CSGOClient.prototype.launch = function() {
 
 CSGOClient.prototype.exit = function() {
   /* Reports to Steam we are not running any apps. */
-  if (this.debug) util.log("Exiting CS:GO");
+  if (this.debug) {
+    util.log("Exiting CS:GO");
+  }
 
   /* stop knocking if exit comes before ready event */
   if (this._gcClientHelloIntervalId) {
@@ -97,7 +104,9 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHa
     clearInterval(this._gcClientHelloIntervalId);
     this._gcClientHelloIntervalId = null;
 
-    if (this.debug) util.log("Received client welcome.");
+    if (this.debug) {
+      util.log("Received client welcome.");
+    }
     this._gcReady = true;
     this.emit("ready");
   }
@@ -110,7 +119,9 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
 
   switch (status) {
     case CSGO.GCConnectionStatus.GCConnectionStatus_HAVE_SESSION:
-      if (this.debug) util.log("GC Connection Status regained.");
+      if (this.debug) {
+        util.log("GC Connection Status regained.");
+      }
 
       // Only execute if _gcClientHelloIntervalID, otherwise it's already been handled (and we don't want to emit multiple 'ready');
       if (this._gcClientHelloIntervalId) {
@@ -123,7 +134,9 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
       break;
 
     default:
-      if (this.debug) util.log("GC Connection Status unreliable - " + status);
+      if (this.debug) {
+        util.log("GC Connection Status unreliable - " + status);
+      }
 
       // Only execute if !_gcClientHelloIntervalID, otherwise it's already been handled (and we don't want to emit multiple 'unready');
       if (!this._gcClientHelloIntervalId) {

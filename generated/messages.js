@@ -76,7 +76,7 @@ CSGO.EGCSystemMsg = {
 	k_EGCMsgGCAccountVacStatusChange: 504,
 	k_EGCMsgCheckFriendship: 505,
 	k_EGCMsgCheckFriendshipResponse: 506,
-}
+};
 
 CSGO.ESOMsg = {
 	k_ESOMsg_Create: 21,
@@ -87,7 +87,7 @@ CSGO.ESOMsg = {
 	k_ESOMsg_UpdateMultiple: 26,
 	k_ESOMsg_CacheSubscriptionCheck: 27,
 	k_ESOMsg_CacheSubscriptionRefresh: 28,
-}
+};
 
 CSGO.EGCBaseClientMsg = {
 	k_EMsgGCClientWelcome: 4004,
@@ -96,7 +96,7 @@ CSGO.EGCBaseClientMsg = {
 	k_EMsgGCServerHello: 4007,
 	k_EMsgGCClientConnectionStatus: 4009,
 	k_EMsgGCServerConnectionStatus: 4010,
-}
+};
 
 CSGO.EGCToGCMsg = {
 	k_EGCToGCMsgMasterAck: 150,
@@ -107,7 +107,7 @@ CSGO.EGCToGCMsg = {
 	k_EMsgRequestSessionIP: 155,
 	k_EMsgRequestSessionIPResponse: 156,
 	k_EGCToGCMsgMasterStartupComplete: 157,
-}
+};
 
 CSGO.ECSGOCMsg = {
 	k_EMsgGCCStrike15_v2_Base: 9100,

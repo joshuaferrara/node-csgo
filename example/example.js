@@ -16,14 +16,14 @@ var onSteamLogOn = function onSteamLogOn(){
         CSGO.launch();
         
         CSGO.on("unhandled", function(message) {
-           console.log("Unhandled msg")
+           console.log("Unhandled msg");
            console.log(message);
         });
         
         CSGO.on("ready", function() {
             util.log("node-csgo ready.");
 
-            CSGO.matchmakingStatsRequest()
+            CSGO.matchmakingStatsRequest();
             CSGO.on("matchmakingStatsData", function(matchmakingStatsResponse) {
                 util.log("Avg. Wait Time: " + matchmakingStatsResponse.globalStats.searchTimeAvg);
                 util.log("Players Online: " + matchmakingStatsResponse.globalStats.playersOnline);
@@ -65,11 +65,11 @@ var onSteamLogOn = function onSteamLogOn(){
     },
     onWebSessionID = function onWebSessionID(webSessionID) {
         util.log("Received web session id.");
-        // steamTrade.sessionID = webSessionID;
+        steamTrade.sessionID = webSessionID;
         bot.webLogOn(function onWebLogonSetTradeCookies(cookies) {
             util.log("Received cookies.");
             for (var i = 0; i < cookies.length; i++) {
-                // steamTrade.setCookie(cookies[i]);
+                steamTrade.setCookie(cookies[i]);
             }
         });
     };
@@ -82,9 +82,13 @@ var logOnDetails = {
     "accountName": username,
     "password": password,
 };
-if (authCode != "") logOnDetails.authCode = authCode;
+if (authCode !== "") {
+    logOnDetails.authCode = authCode;
+}
 var sentry = fs.readFileSync('sentry');
-if (sentry.length) logOnDetails.shaSentryfile = sentry;
+if (sentry.length) {
+    logOnDetails.shaSentryfile = sentry;
+}
 bot.logOn(logOnDetails);
 bot.on("loggedOn", onSteamLogOn)
     .on('sentry', onSteamSentry)
