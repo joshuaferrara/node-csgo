@@ -5,12 +5,19 @@ Build Status: [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg
 
 [![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
 
-Some information below is related to [node-dota2](https://github.com/RJacksonm1/node-dota2). I will update this file as I make changes.
 ---
 
 A node-steam plugin for Counter-Strike: Global Offensive.
 
 Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](https://github.com/RJacksonm1/)
+
+## Used by
+* [PopFlash](https://popflash.site/) - Alternative CS:GO matchmaking & PUG service.
+* [steamgaug.es](https://steamgaug.es/) - Matchmaking status info for CS:GO, TF2 & Dota 2. Also includes general steam status.
+
+## Requirements
+* node-steam
+* CS:GO must be purchased on the account you sign in with.
 
 ## Initializing
 Parameters:
