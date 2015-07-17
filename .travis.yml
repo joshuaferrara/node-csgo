@@ -1,11 +1,14 @@
 language: node_js
-deploy: 
-  api_key: 
-    secure: G2xnNXZtmfp3XQ+18aBic7n0v4JkKsoGweEHm+GVXLPwNsBz5zHzr3PwgiPVXlrGjouPnrkXHs3TDk/siCi6XUZf11GPDQICgA8P2l3IhgLzVLeOgeVq2t8PUgP2ppBKhhFdT85NdMH7GKyNt5wq1Ywp0owb7fWXamDj1fwONHY=
-  email: scjosh2@gmail.com
+deploy:
   provider: npm
-node_js: 
-  - "0.12"
-  - "0.11"
-  - "0.10"
+  email: scjosh2@gmail.com
+  api_key:
+    secure: oRxIBvd9As3QGfgwjFZVbAaYAelVXy4LWDMRwK0oXOeDkeOXiAdk26AY47l6VLc0XoLvipkpNkJ3Rc68pDBb+3Pny1QDVW8U6gPh7IuM729NLcvisciR/vF/rWmFZnTKNXu6ZDUqNJrZxzOd6RHa6Z4y9WdiFjDw+rdYOQYJh70=
+  on:
+    tags: true
+    repo: joshuaferrara/node-csgo
+node_js:
+- '0.12'
+- '0.11'
+- '0.10'
 sudo: false
