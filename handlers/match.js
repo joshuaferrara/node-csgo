@@ -24,7 +24,7 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
   callback = callback || null;
   if (!this._gcReady) {
     if (this.debug) {
-      util.log("GC not ready")
+      util.log("GC not ready");
     }
     return null;
   }
@@ -45,7 +45,7 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
   callback = callback || null;
   if (!this._gcReady) {
     if (this.debug) {
-      util.log("GC not ready")
+      util.log("GC not ready");
     }
     return null;
   }

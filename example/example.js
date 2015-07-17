@@ -65,12 +65,8 @@ var onSteamLogOn = function onSteamLogOn(){
     },
     onWebSessionID = function onWebSessionID(webSessionID) {
         util.log("Received web session id.");
-        steamTrade.sessionID = webSessionID;
         bot.webLogOn(function onWebLogonSetTradeCookies(cookies) {
             util.log("Received cookies.");
-            for (var i = 0; i < cookies.length; i++) {
-                steamTrade.setCookie(cookies[i]);
-            }
         });
     };
 
