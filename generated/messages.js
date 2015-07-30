@@ -1,5 +1,13 @@
 var CSGO = require("../index");
 
+CSGO.GCConnectionStatus = {
+	GCConnectionStatus_HAVE_SESSION: 0,
+	GCConnectionStatus_GC_GOING_DOWN: 1,
+	GCConnectionStatus_NO_SESSION: 2,
+	GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE: 3,
+	GCConnectionStatus_NO_STEAM: 4,
+}
+
 CSGO.EGCSystemMsg = {
 	k_EGCMsgInvalid: 0,
 	k_EGCMsgMulti: 1,
