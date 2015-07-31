@@ -180,6 +180,5 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message)
   if(this.debug){
     util.log('Recieved watch info')
   }
-  console.log(response);
   this.emit('watchList', response);
 }
