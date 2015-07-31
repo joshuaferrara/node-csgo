@@ -29,26 +29,5 @@
   },
   "homepage": "https://github.com/joshuaferrara/node-csgo",
   "_id": "csgo@0.1.2",
-  "_from": "csgo@0.1.2",
-  "gitHead": "d1e4051714ae57bd546ed43dfa614ea1439b5c20",
-  "scripts": {},
-  "_shasum": "736e3de2ceee0f1b53796f4d7c08b70c35fcd2b6",
-  "_npmVersion": "2.11.3",
-  "_nodeVersion": "0.12.7",
-  "_npmUser": {
-    "name": "scjosh",
-    "email": "scjosh2@gmail.com"
-  },
-  "dist": {
-    "shasum": "736e3de2ceee0f1b53796f4d7c08b70c35fcd2b6",
-    "tarball": "http://registry.npmjs.org/csgo/-/csgo-0.1.2.tgz"
-  },
-  "maintainers": [
-    {
-      "name": "scjosh",
-      "email": "scjosh2@gmail.com"
-    }
-  ],
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/csgo/-/csgo-0.1.2.tgz"
+  "_from": "csgo@"
 }
