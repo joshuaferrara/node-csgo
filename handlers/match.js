@@ -17,7 +17,8 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
 
   var payload = new protos.CMsgGCCStrike15_v2_MatchmakingClient2GCHello({});
   console.log(JSON.stringify(payload));
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello | protoMask), payload.toBuffer());
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello, proto: {}},
+      payload.toBuffer());
 };
 
 CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
@@ -37,8 +38,30 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
     accountId: accountId,
     requestLevel: 32
   });
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile, proto: {}},
+      payload.toBuffer(), callback);
+};
 
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile | protoMask), payload.toBuffer(), callback);
+CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) {
+      util.log("GC not ready");
+    }
+    return null;
+  }
+
+  if (this.debug) {
+    util.log("Sending info match request with ID of " + matchid);
+  }
+
+  var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestFullGameInfo({
+      matchid: matchid,
+      outcomeid: outcome,
+      token: token,
+  });
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfom, proto: {}},
+      payload.toBuffer(), callback);
 };
 
 CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
@@ -57,8 +80,8 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
   var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestRecentUserGames({
     accountid: accid
   });
-
-  this._client.toGC(this._appid, (CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames | protoMask), payload.toBuffer(), callback);
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames, proto: {}},
+      payload.toBuffer(), callback)
 };
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
