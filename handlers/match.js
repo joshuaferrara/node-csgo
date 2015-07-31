@@ -21,7 +21,8 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
       payload.toBuffer());
 };
 
-CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
+
+CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, req_level, callback) {
   callback = callback || null;
   if (!this._gcReady) {
     if (this.debug) {
@@ -35,10 +36,64 @@ CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, callback) {
   }
 
   var payload = new protos.CMsgGCCStrike15_v2_ClientRequestPlayersProfile({
-    accountId: accountId,
-    requestLevel: 32
+    account_id: accountId,
+    request_level: req_level || 32
   });
   this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile, proto: {}},
+      payload.toBuffer(), callback);
+};
+CSGO.CSGOClient.prototype.requestCurrentLiveGames = function(callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) {
+      util.log("GC not ready");
+    }
+    return null;
+  }
+
+  if (this.debug) {
+    util.log("Sending live matches");
+  }
+
+  var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames();
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames , proto: {}},
+      payload.toBuffer(), callback);
+};
+CSGO.CSGOClient.prototype.requestLiveGameForUser = function(accountid, callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) {
+      util.log("GC not ready");
+    }
+    return null;
+  }
+
+  if (this.debug) {
+    util.log("Sending live matches");
+  }
+
+  var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestLiveGameForUser({
+    accountid: accountid
+  });
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser , proto: {}},
+      payload.toBuffer(), callback);
+};
+
+CSGO.CSGOClient.prototype.requestWatchInfoFriends = function(request, callback) {
+  callback = callback || null;
+  if (!this._gcReady) {
+    if (this.debug) {
+      util.log("GC not ready");
+    }
+    return null;
+  }
+
+  if (this.debug) {
+    util.log("Sending watch info request");
+  }
+
+  var payload = new protos.CMsgGCCStrike15_v2_ClientRequestWatchInfoFriends(request);
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends2, proto: {}},
       payload.toBuffer(), callback);
 };
 
@@ -56,10 +111,17 @@ CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callba
   }
 
   var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestFullGameInfo({
-      matchid: matchid,
-      outcomeid: outcome,
-      token: token,
+
   });
+  if(matchid){
+    payload.matchid = matchid;
+  }
+  if(outcome){
+    payload.outcomeid = outcome;
+  }
+  if(token){
+    payload.token = token;
+  }
   this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfom, proto: {}},
       payload.toBuffer(), callback);
 };
@@ -83,6 +145,7 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
   this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames, proto: {}},
       payload.toBuffer(), callback)
 };
+
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
@@ -112,3 +175,11 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
   }
   this.emit("matchList", matchListResponse);
 };
+handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message){
+  var response = protos.CMsgGCCStrike15_v2_WatchInfoUsers.decode(message);
+  if(this.debug){
+    util.log('Recieved watch info')
+  }
+  console.log(response);
+  this.emit('watchList', response);
+}

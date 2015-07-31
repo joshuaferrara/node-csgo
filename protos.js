@@ -1,6 +1,6 @@
 var Protobuf = require('protobufjs');
 
-Protobuf.convertFieldsToCamelCase = true;
+Protobuf.convertFieldsToCamelCase = false;
 
 var builder = Protobuf.newBuilder();
 Protobuf.loadProtoFile(__dirname + "/generated/protos/base_gcmessages.proto", builder);
