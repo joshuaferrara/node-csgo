@@ -1,6 +1,8 @@
 node-csgo
 ========
 
+[![Join the chat at https://gitter.im/joshuaferrara/node-csgo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/joshuaferrara/node-csgo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 [![Code Climate](https://codeclimate.com/github/joshuaferrara/node-csgo/badges/gpa.svg)](https://codeclimate.com/github/joshuaferrara/node-csgo)
 [![Gratipay donate button](https://img.shields.io/gratipay/joshuaferrara.svg)](https://www.gratipay.com/joshuaferrara/ "Donate weekly to this project using Gratipay")
