@@ -5,23 +5,25 @@ var EventEmitter = require('events').EventEmitter,
     bignumber = require("bignumber.js"),
     CSGO = exports;
 
-var CSGOClient = function CSGOClient(steamClient, debug) {
+var CSGOClient = function CSGOClient(steamClient, steamUser, steamGC, debug) {
   EventEmitter.call(this);
 
   this.debug = debug || false;
   this._client = steamClient;
+  this._user = steamUser;
+  this._gc = steamGC;
   this._appid = 730;
   this.chatChannels = []; // Map channel names to channel data.
   this._gcReady = false;
   this._gcClientHelloIntervalId = null;
 
   var self = this;
-  this._client.on("fromGC", function fromGC(app, type, message, callback) {
+  this._gc.on('message', function(type, message, callback) {
     callback = callback || null;
 
-    var kMsg = type & ~protoMask;
+    var kMsg = type.msg & ~protoMask;
     if (self.debug) {
-     util.log("CS:GO fromGC: " + [app, kMsg].join(", "));  // TODO:  Turn type-protoMask into key name.
+      util.log("CS:GO fromGC: " + kMsg);  // TODO:  Turn type-protoMask into key name.
     }
 
     if (kMsg in self._handlers) {
@@ -45,7 +47,8 @@ var CSGOClient = function CSGOClient(steamClient, debug) {
       util.log("Client went missing");
     }
     else {
-      self._client.toGC(self._appid, (CSGO.EGCBaseClientMsg.k_EMsgGCClientHello | protoMask), (new protos.CMsgClientHello({})).toBuffer());
+      self._gc.send({msg: CSGO.EGCBaseClientMsg.k_EMsgGCClientHello, proto: {}},
+          new protos.CMsgClientHello({}).toBuffer());
     }
   };
 };
@@ -70,7 +73,11 @@ CSGOClient.prototype.launch = function() {
   if (this.debug) {
     util.log("Launching CS:GO");
   }
-  this._client.gamesPlayed([this._appid]);
+  this._user.gamesPlayed({
+    games_played: [{
+      game_id: '730'
+    }]
+  });
 
   // Keep knocking on the GCs door until it accepts us.
   this._gcClientHelloIntervalId = setInterval(this._sendClientHello, 2500);
