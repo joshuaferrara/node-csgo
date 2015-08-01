@@ -9,7 +9,7 @@
   },
   "peerDependencies": {
     "steam": "1.1.0"
-  }
+  },
   "description": "A node-steam plugin for CS:GO.",
   "main": "index.js",
   "repository": {
