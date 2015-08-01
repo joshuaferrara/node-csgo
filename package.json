@@ -2,12 +2,11 @@
   "name": "csgo",
   "version": "0.1.2",
   "dependencies": {
+	"steam": "1.1.0",
     "protobufjs": "*",
     "deferred": "*",
-    "bignumber.js": "^2.0.7"
-  },
-  "peerDependencies": {
-    "steam": "1.1.0"
+    "bignumber.js": "^2.0.7",
+	"bytebuffer": ">=3.5.5"
   },
   "description": "A node-steam plugin for CS:GO.",
   "main": "index.js",
