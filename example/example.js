@@ -44,13 +44,13 @@ var onSteamLogOn = function onSteamLogOn(response){
 
             CSGO.matchmakingStatsRequest();
             CSGO.on("matchmakingStatsData", function(matchmakingStatsResponse) {
-                util.log("Avg. Wait Time: " + matchmakingStatsResponse.globalStats.searchTimeAvg);
-                util.log("Players Online: " + matchmakingStatsResponse.globalStats.playersOnline);
-                util.log("Players Searching: " + matchmakingStatsResponse.globalStats.playersSearching);
-                util.log("Servers Online: " + matchmakingStatsResponse.globalStats.serversOnline);
-                util.log("Servers Available: " + matchmakingStatsResponse.globalStats.serversAvailable);
-                util.log("Matches in Progress: " + matchmakingStatsResponse.globalStats.ongoingMatches);
-                console.log(matchmakingStatsResponse);
+                util.log("Avg. Wait Time: " + matchmakingStatsResponse.global_stats.search_time_avg);
+                util.log("Players Online: " + matchmakingStatsResponse.global_stats.players_online);
+                util.log("Players Searching: " + matchmakingStatsResponse.global_stats.players_searching);
+                util.log("Servers Online: " + matchmakingStatsResponse.global_stats.servers_online);
+                util.log("Servers Available: " + matchmakingStatsResponse.global_stats.servers_available);
+                util.log("Matches in Progress: " + matchmakingStatsResponse.global_stats.ongoing_matches);
+                console.log(JSON.stringify(matchmakingStatsResponse, null, 4));
 
                 CSGO.playerProfileRequest(CSGO.ToAccountID(bot.steamID)); //
                 CSGO.on("playerProfile", function(profile) {
