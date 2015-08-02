@@ -1,6 +1,10 @@
 node-csgo
 ========
 
+Need help? Don't open an issue - ask in the Gitter room.
+
+[![Join the chat at https://gitter.im/joshuaferrara/node-csgo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/joshuaferrara/node-csgo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 [![Code Climate](https://codeclimate.com/github/joshuaferrara/node-csgo/badges/gpa.svg)](https://codeclimate.com/github/joshuaferrara/node-csgo)
 [![Gratipay donate button](https://img.shields.io/gratipay/joshuaferrara.svg)](https://www.gratipay.com/joshuaferrara/ "Donate weekly to this project using Gratipay")
@@ -83,151 +87,161 @@ Emitted when the connection status to the GC changes, and renders the library un
 
 ```json
 {
-  "accountId": 137013074,
-  "globalStats": {
-    "playersOnline": 68971,
-    "serversOnline": 43433,
-    "playersSearching": 1179,
-    "serversAvailable": 24609,
-    "ongoingMatches": 3163,
-    "searchTimeAvg": 76109,
-    "searchStatistics": [
-      {
-        "gameType": 1032,
-        "searchTimeAvg": 181954,
-        "playersSearching": 304
-      },
-      {
-        "gameType": 264,
-        "searchTimeAvg": 250253,
-        "playersSearching": 137
-      },
-      {
-        "gameType": 520,
-        "searchTimeAvg": 71081,
-        "playersSearching": 678
-      },
-      {
-        "gameType": 2056,
-        "searchTimeAvg": 265412,
-        "playersSearching": 139
-      },
-      {
-        "gameType": 4104,
-        "searchTimeAvg": 104999,
-        "playersSearching": 444
-      },
-      {
-        "gameType": 8200,
-        "searchTimeAvg": 114322,
-        "playersSearching": 471
-      },
-      {
-        "gameType": 16392,
-        "searchTimeAvg": 247397,
-        "playersSearching": 137
-      },
-      {
-        "gameType": 131080,
-        "searchTimeAvg": 266804,
-        "playersSearching": 121
-      },
-      {
-        "gameType": 65544,
-        "searchTimeAvg": 192607,
-        "playersSearching": 141
-      },
-      {
-        "gameType": 262152,
-        "searchTimeAvg": 320319,
-        "playersSearching": 86
-      },
-      {
-        "gameType": 524296,
-        "searchTimeAvg": 370119,
-        "playersSearching": 94
-      },
-      {
-        "gameType": 32776,
-        "searchTimeAvg": 116619,
-        "playersSearching": 404
-      },
-      {
-        "gameType": 1048584,
-        "searchTimeAvg": 152285,
-        "playersSearching": 220
-      },
-      {
-        "gameType": 4194312,
-        "searchTimeAvg": 364245,
-        "playersSearching": 114
-      },
-      {
-        "gameType": 33554440,
-        "searchTimeAvg": 238510,
-        "playersSearching": 120
-      },
-      {
-        "gameType": 134217736,
-        "searchTimeAvg": 254603,
-        "playersSearching": 101
-      },
-      {
-        "gameType": 268435464,
-        "searchTimeAvg": 287695,
-        "playersSearching": 129
-      },
-      {
-        "gameType": 536870920,
-        "searchTimeAvg": 321225,
-        "playersSearching": 140
-      },
-      {
-        "gameType": 2097160,
-        "searchTimeAvg": 333849,
-        "playersSearching": 89
-      },
-      {
-        "gameType": 67108872,
-        "searchTimeAvg": 347291,
-        "playersSearching": 81
-      },
-      {
-        "gameType": 8388616,
-        "searchTimeAvg": 428836,
-        "playersSearching": 54
-      },
-      {
-        "gameType": 16777224,
-        "searchTimeAvg": 339377,
-        "playersSearching": 77
-      }
-    ],
-    "mainPostUrl": "http://media.steampowered.com/apps/csgo/blog/mainmenu/20130630115312u24715681.sha-f048e4d341e7c8a823c28d612312eccd644c2a2b",
-    "requiredAppidVersion": 13260,
-    "pricesheetVersion": 1397848880,
-    "twitchStreamsVersion": 2,
-    "activeTournamentEventid": 3,
-    "activeSurveyId": 0
-  },
-  "vacBanned": 0,
-  "ranking": {
-    "accountId": 137013074,
-    "rankId": 0,
-    "wins": 0
-  },
-  "commendation": {
-    "cmdFriendly": 0,
-    "cmdTeaching": 0,
-    "cmdLeader": 0
-  },
-  "medals": {
-    "medalTeam": 0,
-    "medalCombat": 0,
-    "medalWeapon": 0,
-    "medalGlobal": 0,
-    "medalArms": 0
-  }
+    "account_id": 137013074,
+    "ongoingmatch": null,
+    "global_stats": {
+        "players_online": 423480,
+        "servers_online": 132472,
+        "players_searching": 4212,
+        "servers_available": 65497,
+        "ongoing_matches": 17016,
+        "search_time_avg": 46530,
+        "search_statistics": [
+            {
+                "game_type": 264,
+                "search_time_avg": 128555,
+                "players_searching": 148
+            },
+            {
+                "game_type": 520,
+                "search_time_avg": 31962,
+                "players_searching": 1768
+            },
+            {
+                "game_type": 1032,
+                "search_time_avg": 122353,
+                "players_searching": 426
+            },
+            {
+                "game_type": 2056,
+                "search_time_avg": 136133,
+                "players_searching": 160
+            },
+            {
+                "game_type": 4104,
+                "search_time_avg": 62643,
+                "players_searching": 1069
+            },
+            {
+                "game_type": 8200,
+                "search_time_avg": 70380,
+                "players_searching": 563
+            },
+            {
+                "game_type": 16392,
+                "search_time_avg": 115923,
+                "players_searching": 132
+            },
+            {
+                "game_type": 32776,
+                "search_time_avg": 54906,
+                "players_searching": 1248
+            },
+            {
+                "game_type": 65544,
+                "search_time_avg": 116871,
+                "players_searching": 183
+            },
+            {
+                "game_type": 131080,
+                "search_time_avg": 82308,
+                "players_searching": 145
+            },
+            {
+                "game_type": 262152,
+                "search_time_avg": 209331,
+                "players_searching": 105
+            },
+            {
+                "game_type": 524296,
+                "search_time_avg": 270376,
+                "players_searching": 110
+            },
+            {
+                "game_type": 1048584,
+                "search_time_avg": 64499,
+                "players_searching": 1020
+            },
+            {
+                "game_type": 268435464,
+                "search_time_avg": 84615,
+                "players_searching": 642
+            },
+            {
+                "game_type": 536870920,
+                "search_time_avg": 104965,
+                "players_searching": 478
+            },
+            {
+                "game_type": 2097160,
+                "search_time_avg": 198734,
+                "players_searching": 228
+            },
+            {
+                "game_type": 134217736,
+                "search_time_avg": 147703,
+                "players_searching": 203
+            },
+            {
+                "game_type": 8388616,
+                "search_time_avg": 538828,
+                "players_searching": 138
+            },
+            {
+                "game_type": 16777224,
+                "search_time_avg": 232350,
+                "players_searching": 192
+            },
+            {
+                "game_type": 4194312,
+                "search_time_avg": 237269,
+                "players_searching": 151
+            },
+            {
+                "game_type": 33554440,
+                "search_time_avg": 203183,
+                "players_searching": 181
+            }
+        ],
+        "main_post_url": "",
+        "required_appid_version": 13494,
+        "pricesheet_version": 1438240620,
+        "twitch_streams_version": 2,
+        "active_tournament_eventid": 6,
+        "active_survey_id": 0
+    },
+    "penalty_seconds": null,
+    "penalty_reason": null,
+    "vac_banned": 0,
+    "ranking": {
+        "account_id": 137013074,
+        "rank_id": 11,
+        "wins": 192,
+        "rank_change": null
+    },
+    "commendation": {
+        "cmd_friendly": 3,
+        "cmd_teaching": 3,
+        "cmd_leader": 3
+    },
+    "medals": {
+        "medal_team": 0,
+        "medal_combat": 0,
+        "medal_weapon": 0,
+        "medal_global": 0,
+        "medal_arms": 0,
+        "display_items_defidx": [],
+        "featured_display_item_defidx": null
+    },
+    "my_current_event": null,
+    "my_current_event_teams": [],
+    "my_current_team": null,
+    "my_current_event_stages": [],
+    "survey_vote": null,
+    "activity": null,
+    "player_level": 3,
+    "player_cur_xp": 327684342,
+    "player_xp_bonus_flags": null
 }
 ```
 
@@ -238,36 +252,44 @@ Emitted when the game coordinator responds to the `matchmakingStatsRequest` meth
 
 ```json
 {
-  "accountProfiles": [
+  "request_id": null,
+  "account_profiles": [
     {
-      "accountId": 9716014,
+      "account_id": 137013074,
+      "ongoingmatch": null,
+      "global_stats": null,
+      "penalty_seconds": null,
+      "penalty_reason": null,
+      "vac_banned": null,
       "ranking": {
-        "accountId": 9716014,
-        "rankId": 15,
-        "wins": 51
+        "account_id": 137013074,
+        "rank_id": 11,
+        "wins": 192,
+        "rank_change": null
       },
       "commendation": {
-        "cmdFriendly": 22,
-        "cmdTeaching": 18,
-        "cmdLeader": 23
+        "cmd_friendly": 3,
+        "cmd_teaching": 3,
+        "cmd_leader": 3
       },
       "medals": {
-        "medalTeam": 2,
-        "medalCombat": 3,
-        "medalWeapon": 3,
-        "medalGlobal": 3,
-        "medalArms": 2,
-        "displayItemsDefidx": [
-          874,
-          1316,
-          1028,
-          1024,
-          1014
-        ],
-        "featuredDisplayItemDefidx": 874
+        "medal_team": 0,
+        "medal_combat": 0,
+        "medal_weapon": 0,
+        "medal_global": 0,
+        "medal_arms": 0,
+        "display_items_defidx": [],
+        "featured_display_item_defidx": null
       },
-      "playerLevel": 1,
-      "playerCurXp": 327681600
+      "my_current_event": null,
+      "my_current_event_teams": [],
+      "my_current_team": null,
+      "my_current_event_stages": [],
+      "survey_vote": null,
+      "activity": null,
+      "player_level": 3,
+      "player_cur_xp": 327684342,
+      "player_xp_bonus_flags": null
     }
   ]
 }
@@ -277,114 +299,147 @@ Emitted when the game coordinator responds to the `playerProfileRequest` method.
 
 ## `matchList` (Response to `requestRecentGames`)
 
+The whole response ended up being too big for the readme and caused browsers to crash. Due to this, I've only included an excerpt as to what's returned.
 
 ```json
-{
-  "msgrequestid": 9141,
-  "accountid": 137013074,
-  "servertime": 1421436395,
-  "matches": [
-    {
-      "matchid": "3052384629647474702",
-      "matchtime": 1421377356,
-      "watchablematchinfo": {
-        "serverIp": 123,
-        "tvPort": 1163334677,
-        "tvSpectators": 1,
-        "clDecryptdataKeyPub": "9068150129701000225"
-      },
-      "roundstats": {
-        "reservationid": "3052389598924636197",
-        "reservation": {
-          "accountIds": [
-            76764980,
-            40140216,
-            18708851,
-            9146358,
-            84968273,
-            106960435,
-            37671978,
-            61347894,
-            137013074,
-            66568413
+        {
+          "reservationid": {
+            "low": 65,
+            "high": 715485165,
+            "unsigned": true
+          },
+          "reservation": {
+            "account_ids": [
+              2879081,
+              182261908,
+              225695551,
+              30039512,
+              90132590,
+              94815387,
+              37671978,
+              31906737,
+              137013074,
+              61347894
+            ],
+            "game_type": 1032,
+            "match_id": null,
+            "server_version": null,
+            "rankings": [],
+            "encryption_key": null,
+            "encryption_key_pub": null,
+            "party_ids": [],
+            "whitelist": [],
+            "tv_master_steamid": null,
+            "tournament_event": null,
+            "tournament_teams": [],
+            "tournament_casters_account_ids": [],
+            "tv_relay_steamid": null,
+            "pre_match_data": null
+          },
+          "map": "http://replay124.valve.net/730/003072985384448163905_0699089210.dem.bz2",
+          "round": null,
+          "kills": [
+            21,
+            22,
+            15,
+            15,
+            12,
+            37,
+            20,
+            23,
+            17,
+            15
           ],
-          "gameType": 1048584
-        },
-        "map": "http://replay123.valve.net/730/003052389598924636197_1163334677.dem.bz2",
-        "kills": [
-          25,
-          21,
-          22,
-          13,
-          17,
-          20,
-          20,
-          16,
-          18,
-          10
-        ],
-        "assists": [
-          5,
-          10,
-          6,
-          6,
-          5,
-          3,
-          7,
-          6,
-          6,
-          4
-        ],
-        "deaths": [
-          16,
-          18,
-          16,
-          16,
-          19,
-          19,
-          20,
-          18,
-          22,
-          20
-        ],
-        "scores": [
-          61,
-          60,
-          54,
-          45,
-          43,
-          58,
-          53,
-          48,
-          44,
-          34
-        ],
-        "matchResult": 1,
-        "teamScores": [
-          16,
-          8
-        ],
-        "matchDuration": 2164,
-        "mvps": [
-          5,
-          3,
-          4,
-          2,
-          2,
-          1,
-          3,
-          4,
-          0,
-          0
-        ]
-      }
-    },
-    [...]
-  ]
-}
+          "assists": [
+            5,
+            5,
+            1,
+            3,
+            4,
+            2,
+            3,
+            2,
+            6,
+            7
+          ],
+          "deaths": [
+            22,
+            22,
+            24,
+            23,
+            21,
+            13,
+            13,
+            19,
+            20,
+            20
+          ],
+          "scores": [
+            55,
+            54,
+            40,
+            39,
+            37,
+            79,
+            65,
+            59,
+            41,
+            37
+          ],
+          "pings": [],
+          "round_result": null,
+          "match_result": 2,
+          "team_scores": [
+            11,
+            16
+          ],
+          "confirm": null,
+          "reservation_stage": null,
+          "match_duration": 2332,
+          "enemy_kills": [
+            21,
+            22,
+            15,
+            15,
+            12,
+            37,
+            20,
+            23,
+            17,
+            15
+          ],
+          "enemy_headshots": [
+            12,
+            11,
+            4,
+            2,
+            3,
+            9,
+            6,
+            9,
+            3,
+            12
+          ],
+          "enemy_3ks": [],
+          "enemy_4ks": [],
+          "enemy_5ks": [],
+          "mvps": [
+            4,
+            3,
+            1,
+            1,
+            2,
+            4,
+            5,
+            2,
+            3,
+            2
+          ],
+          "spectators_count": null,
+          "spectators_count_tv": null,
+          "spectators_count_lnk": null,
+          "enemy_kills_agg": []
+        }
 ```
 
 Emitted when `requestRecentGames` is replied to.
-
-## Testing
-There is no automated test suite for node-csgo, however the `example` directory does contain a steam bot with an example method to grab the GC status; you can use this bot to test the library.
