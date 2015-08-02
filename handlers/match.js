@@ -122,7 +122,7 @@ CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callba
   if(token){
     payload.token = token;
   }
-  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfom, proto: {}},
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo, proto: {}},
       payload.toBuffer(), callback);
 };
 
