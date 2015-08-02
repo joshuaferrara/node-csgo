@@ -479,7 +479,7 @@ The whole response ended up being too big for the readme and caused browsers to 
         }
 ```
 
-Emitted when `requestRecentGames` is replied to.
+Emitted when `requestRecentGames`, `requestGame`, `requestLiveGameForUser`, `requestCurrentLiveGames` is replied to.
 
 ## `watchList` (Response to `requestWatchInfoFriends`)
 Example:
@@ -496,7 +496,7 @@ Example:
       "tv_watch_password": {
         "buffer": {
           "type": "Buffer",
-          "data": [ 'someBytes' ]
+          "data": [ ]
         },
         "offset": 21,
         "markedOffset": -1,
