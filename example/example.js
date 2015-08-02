@@ -6,7 +6,7 @@ var Steam = require("steam"),
     steamUser = new Steam.SteamUser(bot),
     steamFriends = new Steam.SteamFriends(bot),
     steamGC = new Steam.SteamGameCoordinator(bot, 730);
-    CSGO = new csgo.CSGOClient(bot, steamUser, steamGC, false),
+    CSGO = new csgo.CSGOClient(steamUser, steamGC, false),
     readlineSync = require("readline-sync"),
     crypto = require("crypto");
 

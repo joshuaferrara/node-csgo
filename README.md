@@ -27,14 +27,17 @@ Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](
 
 # Initializing
 Parameters:
-* `steamClient` - Pass a SteamClient instance to use to send & receive GC messages.
+* `steamUser` - Pass a SteamUser instance to change your current status(In-game/not).
+* `steamGC` - Pass a SteamGameCoordinator instance to use to send & receive GC messages.
 * `debug` - A boolean noting whether to print information about operations to console.
 
 ```js
 var Steam = require('steam'),
     steamClient = new Steam.SteamClient(),
+    steamUser = new Steam.SteamUser(steamClient),
+    steamGC = new Steam.SteamGameCoordinator(steamClient, 730);
     csgo = require('csgo'),
-    CSGO = new csgo.CSGOClient(steamClient, true);
+    CSGO = new csgo.CSGOClient(steamUser, steamGC, false),
 ```
 
 # Methods
@@ -66,6 +69,40 @@ Sends a message to the Game Coordinator requesting some matchmaking stats. Liste
 ### `requestRecentGames(accountId)`
 
 Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
+
+### `requestLiveGameForUser(accountId)`
+
+Requests current live game info for given user. Listen for the `matchList` event for the game coordinator's response.
+
+### `requestGame(matchid, outcomeid, token)`
+
+Requests info about game. We still don't know for sure what we should use as outcomeid and token. Listen for the `matchList` event for the game coordinator's response.
+
+### `requestWatchInfoFriends(arguments)`
+
+Requests watchable info for game.
+Arguments:
+```javascript
+int request_id; //Not enough tests yet
+account_ids[array_of_csgo_accounts];//Not enough tests yet
+long serverid;//ServerID of match.
+long matchid;//MatchID of match.
+```
+Example:
+```javascript
+CSGO.requestWatchInfoFriends({
+  serverid: new Long(-569600767, -2130640678, true).toString(),
+  matchid: new Long(39, 719230023, true).toString()
+});
+```
+Requirements: game should be live.
+
+Listen for the `watchList` event for the game coordinator's response.
+
+### `requestCurrentLiveGames()`
+
+Requests a list of current live games. Listen for the `matchList` event for the game coordinator's response.
+
 
 ## Player Info
 
@@ -443,3 +480,52 @@ The whole response ended up being too big for the readme and caused browsers to 
 ```
 
 Emitted when `requestRecentGames` is replied to.
+
+## `watchList` (Response to `requestWatchInfoFriends`)
+Example:
+```json
+{
+  "request_id": 0,
+  "account_ids": [],
+  "watchable_match_infos": [
+    {
+      "server_ip": 2453839835,
+      "tv_port": 28056,
+      "tv_spectators": 1,
+      "tv_time": 417,
+      "tv_watch_password": {
+        "buffer": {
+          "type": "Buffer",
+          "data": [ 'someBytes' ]
+        },
+        "offset": 21,
+        "markedOffset": -1,
+        "limit": 53,
+        "littleEndian": true,
+        "noAssert": false
+      },
+      "cl_decryptdata_key": null,
+      "cl_decryptdata_key_pub": {
+        "low": -249571153,
+        "high": 1941167002,
+        "unsigned": true
+      },
+      "game_type": 32776,
+      "game_mapgroup": "mg_de_mirage",
+      "game_map": "de_mirage",
+      "server_id": {
+        "low": 2054631424,
+        "high": 20977258,
+        "unsigned": true
+      },
+      "match_id": {
+        "low": 32,
+        "high": 719254593,
+        "unsigned": true
+      },
+      "reservation_id": null
+    }
+  ],
+  "extended_timeout": null
+}
+```

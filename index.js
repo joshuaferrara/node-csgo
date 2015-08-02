@@ -5,11 +5,10 @@ var EventEmitter = require('events').EventEmitter,
     bignumber = require("bignumber.js"),
     CSGO = exports;
 
-var CSGOClient = function CSGOClient(steamClient, steamUser, steamGC, debug) {
+var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
   EventEmitter.call(this);
 
   this.debug = debug || false;
-  this._client = steamClient;
   this._user = steamUser;
   this._gc = steamGC;
   this._appid = 730;
@@ -43,8 +42,8 @@ var CSGOClient = function CSGOClient(steamClient, steamUser, steamGC, debug) {
     if (self.debug) {
       util.log("Sending ClientHello");
     }
-    if (!self._client) {
-      util.log("Client went missing");
+    if (!self._gc) {
+      util.log("GC went missing");
     }
     else {
       self._gc.send({msg: CSGO.EGCBaseClientMsg.k_EMsgGCClientHello, proto: {}},
@@ -91,11 +90,13 @@ CSGOClient.prototype.exit = function() {
 
   /* stop knocking if exit comes before ready event */
   if (this._gcClientHelloIntervalId) {
-      clearInterval(this._gcClientHelloIntervalId);
-      this._gcClientHelloIntervalId = null;
+    clearInterval(this._gcClientHelloIntervalId);
+    this._gcClientHelloIntervalId = null;
   }
   this._gcReady = false;
-  this._client.gamesPlayed([]);
+  this._user.gamesPlayed({
+    games_played: [{}]
+  });
 };
 
 
