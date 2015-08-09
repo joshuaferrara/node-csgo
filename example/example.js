@@ -80,7 +80,7 @@ var onSteamLogOn = function onSteamLogOn(response){
     },
     onSteamServers = function onSteamServers(servers) {
         util.log("Received servers.");
-        fs.writeFile('servers', JSON.stringify(servers));
+        fs.writeFile('servers.json', JSON.stringify(servers, null, 2));
     }
 
 var username = readlineSync.question('Username: ');
