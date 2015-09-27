@@ -16,7 +16,6 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
   }
 
   var payload = new protos.CMsgGCCStrike15_v2_MatchmakingClient2GCHello({});
-  console.log(JSON.stringify(payload));
   this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello, proto: {}},
       payload.toBuffer());
 };
@@ -142,10 +141,41 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
   var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestRecentUserGames({
     accountid: accid
   });
-  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames, proto: {}},
+  this._gc.send(
+      {
+        msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames,
+        proto: {
+
+        }
+      },
       payload.toBuffer(), callback)
 };
-
+CSGO.CSGOClient.prototype.richPresenceRequest = function(steamids, callback){
+  this._gc._client.send({
+        msg: CSGO.EMsg.ClientRichPresenceRequest,
+        proto: {
+          routing_appid: 730
+        }
+      },
+      new protos.schema.CMsgClientRichPresenceRequest({
+        steamid_request: steamids
+      }).toBuffer(), callback);
+};
+CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
+  var payload = new protos.schema.CMsgClientRichPresenceUpload();
+  payload.rich_presence_kv = require("../VDF").encode(rp);
+  console.log(payload.rich_presence_kv);
+  if(steamids){
+    payload.steamid_broadcast = steamids;
+  }
+  this._gc._client.send({
+        msg: CSGO.EMsg.ClientRichPresenceUpload,
+        proto: {
+          routing_appid: 730
+        }
+      },
+      payload.toBuffer(), callback);
+};
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
@@ -181,4 +211,18 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message)
     util.log('Recieved watch info')
   }
   this.emit('watchList', response);
+}
+handlers[CSGO.EMsg.ClientRichPresenceInfo] = function(data) {
+  var vdf = require('../VDF');
+  var response_kv = protos.schema.CMsgClientRichPresenceInfo.decode(data);
+  var output = {};
+  for(var index in response_kv.rich_presence){
+    if(response_kv.rich_presence.hasOwnProperty(index)){
+      var rp = vdf.decode(response_kv.rich_presence[index].rich_presence_kv.toBuffer());
+      if(rp.hasOwnProperty('RP'))
+        rp = rp['RP'];
+      output[response_kv.rich_presence[index].steamid_user] = rp;
+    }
+  }
+  this.emit('richPresenceInfo', output);
 }
