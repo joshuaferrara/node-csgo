@@ -24,7 +24,6 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
     if (self.debug) {
       util.log("CS:GO fromGC: " + kMsg);  // TODO:  Turn type-protoMask into key name.
     }
-
     if (kMsg in self._handlers) {
       if (callback) {
         self._handlers[kMsg].call(self, message, callback);
@@ -35,6 +34,23 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
     }
     else {
       self.emit("unhandled", kMsg);
+    }
+  });
+
+  this._gc._client.on('message', function(type, message, callback) {
+    callback = callback || null;
+
+    var kMsg = type.msg & ~protoMask;
+    if (kMsg in self._handlers) {
+      if (callback) {
+        self._handlers[kMsg].call(self, message, callback);
+      }
+      else {
+        self._handlers[kMsg].call(self, message);
+      }
+    }
+    else {
+      self.emit("unhandled_steam", kMsg);
     }
   });
 
