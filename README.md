@@ -103,7 +103,6 @@ Listen for the `watchList` event for the game coordinator's response.
 
 Requests a list of current live games. Listen for the `matchList` event for the game coordinator's response.
 
-
 ## Player Info
 
 ### `playerProfileRequest(accountId)`
@@ -111,6 +110,12 @@ Requests a list of current live games. Listen for the `matchList` event for the 
 `accountId` is the player's account ID (A player's SteamID64 can be converted to an account ID with `CSGO.ToAccountID(steamid)`).
 
 Requests a player's profile from the game coordinator. The player must be online and playing CS:GO. Listen for the `playerProfile` event for the game coordinator's response.
+
+## Rich Presence
+
+### `richPresenceUpload(richPresenceObject)`
+
+Sets the rich presence object for the currently logged in user. Rich presence is Valve's solution to giving friends information on what you're doing in a game. For example, when you see information about another friends matchmaking game (as in, the map and score), this is set by using rich presence. An example of how to use this method can be found in [example.js](https://github.com/joshuaferrara/node-csgo/blob/master/example/example.js)
 
 # Events
 ### `ready`
