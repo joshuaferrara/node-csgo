@@ -63,6 +63,14 @@ var onSteamLogOn = function onSteamLogOn(response){
                    console.log("Match List");
                    console.log(JSON.stringify(list, null, 2));
                 });
+                
+                CSGO.richPresenceUpload({
+                    RP: {
+                        status: "Hello World!", // Sets rich presence text to "Hello World!"
+                        version: 13503, // Not sure what this value does
+                        time: 161.164087 // This might be the amount of time since you have started the game, not sure.
+                    }
+                });
             });
         });
 
