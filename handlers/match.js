@@ -1,7 +1,6 @@
 var CSGO = require("../index"),
     util = require("util"),
-    protos = require("../protos"),
-    protoMask = 0x80000000;
+    protos = require("../protos");
 
 CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
   if (!this._gcReady) {
@@ -148,7 +147,7 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
 
         }
       },
-      payload.toBuffer(), callback)
+      payload.toBuffer(), callback);
 };
 CSGO.CSGOClient.prototype.richPresenceRequest = function(steamids, callback){
   this._gc._client.send({
@@ -208,7 +207,7 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message){
   var response = protos.CMsgGCCStrike15_v2_WatchInfoUsers.decode(message);
   if(this.debug){
-    util.log('Recieved watch info')
+    util.log('Recieved watch info');
   }
   this.emit('watchList', response);
 }
@@ -219,10 +218,11 @@ handlers[CSGO.EMsg.ClientRichPresenceInfo] = function(data) {
   for(var index in response_kv.rich_presence){
     if(response_kv.rich_presence.hasOwnProperty(index)){
       var rp = vdf.decode(response_kv.rich_presence[index].rich_presence_kv.toBuffer());
-      if(rp.hasOwnProperty('RP'))
-        rp = rp['RP'];
+      if(rp.hasOwnProperty('RP')) {
+        rp = rp.RP;
+      }
       output[response_kv.rich_presence[index].steamid_user] = rp;
     }
   }
   this.emit('richPresenceInfo', output);
-}
+};
