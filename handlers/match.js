@@ -163,7 +163,10 @@ CSGO.CSGOClient.prototype.richPresenceRequest = function(steamids, callback){
 CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
   var payload = new protos.schema.CMsgClientRichPresenceUpload();
   payload.rich_presence_kv = require("../VDF").encode(rp);
-  console.log(payload.rich_presence_kv);
+  if(this.debug){
+      util.log("Rich presence Payload:")
+      console.log(payload.rich_presence_kv);
+  }
   if(steamids){
     payload.steamid_broadcast = steamids;
   }
