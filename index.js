@@ -176,3 +176,5 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
 CSGO.CSGOClient = CSGOClient;
 
 require("./handlers/match");
+require("./handlers/player");
+require("./handlers/rich_presence");

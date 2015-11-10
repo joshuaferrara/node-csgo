@@ -19,27 +19,6 @@ CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
       payload.toBuffer());
 };
 
-
-CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, req_level, callback) {
-  callback = callback || null;
-  if (!this._gcReady) {
-    if (this.debug) {
-      util.log("GC not ready");
-    }
-    return null;
-  }
-
-  if (this.debug) {
-    util.log("Sending player profile request");
-  }
-
-  var payload = new protos.CMsgGCCStrike15_v2_ClientRequestPlayersProfile({
-    account_id: accountId,
-    request_level: req_level || 32
-  });
-  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile, proto: {}},
-      payload.toBuffer(), callback);
-};
 CSGO.CSGOClient.prototype.requestCurrentLiveGames = function(callback) {
   callback = callback || null;
   if (!this._gcReady) {
@@ -149,35 +128,6 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
       },
       payload.toBuffer(), callback);
 };
-CSGO.CSGOClient.prototype.richPresenceRequest = function(steamids, callback){
-  this._gc._client.send({
-        msg: CSGO.EMsg.ClientRichPresenceRequest,
-        proto: {
-          routing_appid: 730
-        }
-      },
-      new protos.schema.CMsgClientRichPresenceRequest({
-        steamid_request: steamids
-      }).toBuffer(), callback);
-};
-CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
-  var payload = new protos.schema.CMsgClientRichPresenceUpload();
-  payload.rich_presence_kv = require("../VDF").encode(rp);
-  if(this.debug){
-      util.log("Rich presence Payload:")
-      console.log(payload.rich_presence_kv);
-  }
-  if(steamids){
-    payload.steamid_broadcast = steamids;
-  }
-  this._gc._client.send({
-        msg: CSGO.EMsg.ClientRichPresenceUpload,
-        proto: {
-          routing_appid: 730
-        }
-      },
-      payload.toBuffer(), callback);
-};
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
@@ -190,15 +140,6 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello] = functi
   this.emit("matchmakingStatsData", matchmakingStatsResponse);
 };
 
-handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_PlayersProfile] = function onPlayerProfileResponse(message) {
-  var playerProfileResponse = protos.CMsgGCCStrike15_v2_PlayersProfile.decode(message);
-
-  if (this.debug) {
-    util.log("Received player profile");
-  }
-  this.emit("playerProfile", playerProfileResponse);
-};
-
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
   var matchListResponse = protos.CMsgGCCStrike15_v2_MatchList.decode(message);
 
@@ -207,6 +148,7 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
   }
   this.emit("matchList", matchListResponse);
 };
+
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message){
   var response = protos.CMsgGCCStrike15_v2_WatchInfoUsers.decode(message);
   if(this.debug){
@@ -214,18 +156,3 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message)
   }
   this.emit('watchList', response);
 }
-handlers[CSGO.EMsg.ClientRichPresenceInfo] = function(data) {
-  var vdf = require('../VDF');
-  var response_kv = protos.schema.CMsgClientRichPresenceInfo.decode(data);
-  var output = {};
-  for(var index in response_kv.rich_presence){
-    if(response_kv.rich_presence.hasOwnProperty(index)){
-      var rp = vdf.decode(response_kv.rich_presence[index].rich_presence_kv.toBuffer());
-      if(rp.hasOwnProperty('RP')) {
-        rp = rp.RP;
-      }
-      output[response_kv.rich_presence[index].steamid_user] = rp;
-    }
-  }
-  this.emit('richPresenceInfo', output);
-};
