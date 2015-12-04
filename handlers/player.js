@@ -1,6 +1,6 @@
 var CSGO = require("../index"),
     util = require("util"),
-    protos = require("../protos");
+    protos = require("../helpers/protos");
 
 CSGO.CSGOClient.prototype.playerProfileRequest = function(accountId, req_level, callback) {
   callback = callback || null;

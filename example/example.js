@@ -6,16 +6,20 @@ var Steam = require("steam"),
     steamUser = new Steam.SteamUser(bot),
     steamFriends = new Steam.SteamFriends(bot),
     steamGC = new Steam.SteamGameCoordinator(bot, 730);
-    CSGO = new csgo.CSGOClient(steamUser, steamGC, false),
+    CSGOCli = new csgo.CSGOClient(steamUser, steamGC, false),
     readlineSync = require("readline-sync"),
     crypto = require("crypto");
+
+/* Decoding Share Codes */
+var scDecoder = new csgo.SharecodeDecoder("CSGO-U6MWi-hYFWJ-opPwD-JciHm-qOijD");
+console.log("Sharecode CSGO-U6MWi-hYFWJ-opPwD-JciHm-qOijD decodes into: ");
+console.log(scDecoder.decode());
 
 function MakeSha(bytes) {
     var hash = crypto.createHash('sha1');
     hash.update(bytes);
     return hash.digest();
 }
-
 
 var onSteamLogOn = function onSteamLogOn(response){
         if (response.eresult == Steam.EResult.OK) {
@@ -30,20 +34,20 @@ var onSteamLogOn = function onSteamLogOn(response){
         util.log("Logged on.");
 
         util.log("Current SteamID64: " + bot.steamID);
-        util.log("Account ID: " + CSGO.ToAccountID(bot.steamID));
+        util.log("Account ID: " + CSGOCli.ToAccountID(bot.steamID));
 
-        CSGO.launch();
+        CSGOCli.launch();
 
-        CSGO.on("unhandled", function(message) {
+        CSGOCli.on("unhandled", function(message) {
             util.log("Unhandled msg");
             util.log(message);
         });
 
-        CSGO.on("ready", function() {
+        CSGOCli.on("ready", function() {
             util.log("node-csgo ready.");
 
-            CSGO.matchmakingStatsRequest();
-            CSGO.on("matchmakingStatsData", function(matchmakingStatsResponse) {
+            CSGOCli.matchmakingStatsRequest();
+            CSGOCli.on("matchmakingStatsData", function(matchmakingStatsResponse) {
                 util.log("Avg. Wait Time: " + matchmakingStatsResponse.global_stats.search_time_avg);
                 util.log("Players Online: " + matchmakingStatsResponse.global_stats.players_online);
                 util.log("Players Searching: " + matchmakingStatsResponse.global_stats.players_searching);
@@ -52,19 +56,19 @@ var onSteamLogOn = function onSteamLogOn(response){
                 util.log("Matches in Progress: " + matchmakingStatsResponse.global_stats.ongoing_matches);
                 console.log(JSON.stringify(matchmakingStatsResponse, null, 4));
 
-                CSGO.playerProfileRequest(CSGO.ToAccountID(bot.steamID)); //
-                CSGO.on("playerProfile", function(profile) {
+                CSGOCli.playerProfileRequest(CSGOCli.ToAccountID(bot.steamID)); //
+                CSGOCli.on("playerProfile", function(profile) {
                    console.log("Profile");
                    console.log(JSON.stringify(profile, null, 2));
                 });
 
-                CSGO.requestRecentGames(CSGO.ToAccountID(bot.steamID));
-                CSGO.on("matchList", function(list) {
+                CSGOCli.requestRecentGames(CSGOCli.ToAccountID(bot.steamID));
+                CSGOCli.on("matchList", function(list) {
                    console.log("Match List");
                    console.log(JSON.stringify(list, null, 2));
                 });
                 
-                CSGO.richPresenceUpload({
+                CSGOCli.richPresenceUpload({
                     RP: {
                         status: "Hello World!", // Sets rich presence text to "Hello World!"
                         version: 13503, // Not sure what this value does
@@ -74,11 +78,11 @@ var onSteamLogOn = function onSteamLogOn(response){
             });
         });
 
-        CSGO.on("unready", function onUnready(){
+        CSGOCli.on("unready", function onUnready(){
             util.log("node-csgo unready.");
         });
 
-        CSGO.on("unhandled", function(kMsg) {
+        CSGOCli.on("unhandled", function(kMsg) {
             util.log("UNHANDLED MESSAGE " + kMsg);
         });
     },

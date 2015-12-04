@@ -1,6 +1,6 @@
 var CSGO = require("../index"),
     util = require("util"),
-    protos = require("../protos");
+    protos = require("../helpers/protos");
 
 CSGO.CSGOClient.prototype.matchmakingStatsRequest = function() {
   if (!this._gcReady) {
