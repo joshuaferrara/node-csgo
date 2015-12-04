@@ -121,7 +121,7 @@ Sets the rich presence object for the currently logged in user. Rich presence is
 
 ## Sharecode Decoding/Encoding
 
-## `new CSGO.SharecodeDecoder(string code);`
+### `new CSGO.SharecodeDecoder(string code);`
 
 Instantiates a SharecodeDecoder class to decode sharecodes.
 
