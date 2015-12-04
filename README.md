@@ -119,6 +119,22 @@ Requests a player's profile from the game coordinator. The player must be online
 
 Sets the rich presence object for the currently logged in user. Rich presence is Valve's solution to giving friends information on what you're doing in a game. For example, when you see information about another friends matchmaking game (as in, the map and score), this is set by using rich presence. An example of how to use this method can be found in [example.js](https://github.com/joshuaferrara/node-csgo/blob/master/example/example.js)
 
+## Sharecode Decoding/Encoding
+
+## `new CSGO.SharecodeDecoder(string code);`
+
+Instantiates a SharecodeDecoder class to decode sharecodes.
+
+Calling the `decode()` method of the `SharecodeDecoder` will return an object with the decoded information.
+
+```javascript
+console.log(new CSGO.SharecodeDecoder("CSGO-U6MWi-hYFWJ-opPwD-JciHm-qOijD").decode())
+
+{ matchId: '3106049990460440633',
+  outcomeId: '3106056003414655216',
+  tokenId: '11842' }
+```
+
 # Events
 ### `ready`
 Emitted when the GC is ready to receive messages.  Be careful not to declare anonymous functions as event handlers here, as you'll need to be able to invalidate event handlers on an `unready` event.
