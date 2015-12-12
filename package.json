@@ -1,6 +1,6 @@
 {
   "name": "csgo",
-  "version": "0.1.10",
+  "version": "0.1.11",
     "dependencies": {
     "protobufjs": "*",
     "deferred": "*",
@@ -32,6 +32,6 @@
     "url": "https://github.com/joshuaferrara/node-csgo/issues"
   },
   "homepage": "https://github.com/joshuaferrara/node-csgo",
-  "_id": "csgo@0.1.10",
+  "_id": "csgo@0.1.11",
   "_from": "csgo@"
 }

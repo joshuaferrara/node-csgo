@@ -5,6 +5,8 @@ var EventEmitter = require('events').EventEmitter,
     bignumber = require("bignumber.js"),
     CSGO = exports;
 
+require("./protos/messages");
+
 var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
   EventEmitter.call(this);
 
@@ -68,8 +70,6 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
   };
 };
 util.inherits(CSGOClient, EventEmitter);
-
-require("./generated/messages");
 
 CSGOClient.prototype.ServerRegion = CSGO.ServerRegion;
 CSGOClient.prototype.GameMode = CSGO.GameMode;
