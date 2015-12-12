@@ -2,3 +2,6 @@ example/config.js
 example/sentry
 node_modules
 example/node_modules
+protos/*.proto
+.codeclimate.yml
+.travis.yml

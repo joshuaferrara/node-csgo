@@ -1,6 +1,6 @@
 {
   "name": "csgo",
-  "version": "0.1.8",
+  "version": "0.1.10",
     "dependencies": {
     "protobufjs": "*",
     "deferred": "*",
@@ -21,6 +21,9 @@
     "valve",
     "csgo"
   ],
+  "scripts" : {
+    "postinstall" : "node protoUpdate.js"
+  },
   "author": {
     "name": "Joshua Ferrara"
   },
@@ -29,6 +32,6 @@
     "url": "https://github.com/joshuaferrara/node-csgo/issues"
   },
   "homepage": "https://github.com/joshuaferrara/node-csgo",
-  "_id": "csgo@0.1.7",
+  "_id": "csgo@0.1.10",
   "_from": "csgo@"
 }
