@@ -33,3 +33,5 @@ node_modules
 
 # c9 IDE
 .c9
+
+protos/*
