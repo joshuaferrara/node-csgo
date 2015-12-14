@@ -7,8 +7,11 @@ var protos = [
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/base_gcmessages.proto",
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/cstrike15_gcmessages.proto",
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/gcsdk_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/steammessages.proto",
 	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver.proto",
-	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver_2.proto"
+	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver_2.proto",
+	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_base.proto",
+	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/encrypted_app_ticket.proto"
 ];
 
 function download(downloadUrl) {
