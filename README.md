@@ -76,9 +76,9 @@ Requests a list of recent games for the given accountId. Listen for the `matchLi
 
 Requests current live game info for given user. Listen for the `matchList` event for the game coordinator's response.
 
-### `requestGame(matchid, outcomeid, token)`
+### `requestGame(string matchid, string outcomeid, int token)`
 
-Requests info about game. We still don't know for sure what we should use as outcomeid and token. Listen for the `matchList` event for the game coordinator's response.
+Requests info about game given a matchId, outcomeId, and token for a game (Tip: These can be found with the Sharecode decoder). Listen for the `matchList` event for the game coordinator's response.
 
 ### `requestWatchInfoFriends(arguments)`
 
