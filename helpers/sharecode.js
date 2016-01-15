@@ -63,17 +63,48 @@ class SharecodeDecoder {
 	}
 
 	get io() {
-		return new StringIO.StringIO(packJS.pack("H*", this.decoded_code.toString(16)))
+		return new StringIO.StringIO(this.decoded_code);
 	}
 
 	get decoded_code() {
 		var self = this;
+		var result = Array.apply(null, new Array(18)).map(Number.prototype.valueOf, 0);
 		var reversed = this.code.split('').reverse();
-		var result = new BigNumber(0);
 		reversed.forEach(function(char, index) {
-			result = (result.times(new BigNumber(self.DICTIONARY_LENGTH))).plus(new BigNumber(self.DICTIONARY.indexOf(char)));
+			var addval = self.DICTIONARY.indexOf(char);
+			var tmp = Array.apply(null, new Array(18)).map(Number.prototype.valueOf, 0);
+			var carry = 0;
+			var v = 0;
+			for(var t = 17; t >= 0; t--) {
+				carry = 0;
+				for(var s = t; s >= 0; s--) {
+					if(t - s == 0) {
+						v = tmp[s] + result[t] * 57;
+					}else {
+						v = 0;
+					}
+					v = v + carry;
+					carry = v >> 8;
+					tmp[s] = v & 0xFF;
+				}
+			}
+			result = tmp;
+			carry = 0;
+
+			for(var t = 17; t >= 0; t--) {
+				if(t == 17) {
+					v = result[t] + addval;
+				}else {
+					v = result[t];
+				}
+				v = v + carry;
+				carry = v >> 8;
+				result[t] = v & 0xFF;
+			}
 		});
-		return result;
+
+		result.unshift('C*');
+		return packJS.pack.apply(this, result);	
 	}
 }
 
