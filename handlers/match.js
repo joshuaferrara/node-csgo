@@ -111,24 +111,17 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(arg1, arg2) {
     return null;
   }
   
-  var accid, callback;
-  if(arguments.length >= 2)
-  {
-    accid = arg1;
+  var accid = this.ToAccountID(this._user._client.steamID);
+  var callback;
+  if(arguments.length >= 2) {
     callback = arg2 || null;
-  }else if(arguments.length == 1)
-  {
-    if(typeof arg1 == 'function')
-    {
-      accid = this.ToAccountID(this._user._client.steamID);
+    util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
+  }else if(arguments.length == 1) {
+    if(typeof arg1 == 'function') {
       callback = arg1 || null;
-    }else
-    {
-      accid = arg1;
+    }else {
+      util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
     }
-  }else
-  {
-    accid = this.ToAccountID(this._user._client.steamID);
   }
 
   if (this.debug) {
