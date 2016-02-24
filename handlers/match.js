@@ -103,7 +103,7 @@ CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callba
       payload.toBuffer(), callback);
 };
 
-CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
+CSGO.CSGOClient.prototype.requestRecentGames = function(callback) {
   callback = callback || null;
   if (!this._gcReady) {
     if (this.debug) {
@@ -111,6 +111,8 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
     }
     return null;
   }
+  
+  var accid = this.ToAccountID(this._user._client.steamID);
 
   if (this.debug) {
     util.log("Sending recent match request with ID of " + accid);
