@@ -103,8 +103,7 @@ CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callba
       payload.toBuffer(), callback);
 };
 
-CSGO.CSGOClient.prototype.requestRecentGames = function(callback) {
-  callback = callback || null;
+CSGO.CSGOClient.prototype.requestRecentGames = function(arg1, arg2) {
   if (!this._gcReady) {
     if (this.debug) {
       util.log("GC not ready");
@@ -112,7 +111,25 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(callback) {
     return null;
   }
   
-  var accid = this.ToAccountID(this._user._client.steamID);
+  var accid, callback;
+  if(arguments.length >= 2)
+  {
+    accid = arg1;
+    callback = arg2 || null;
+  }else if(arguments.length == 1)
+  {
+    if(typeof arg1 == 'function')
+    {
+      accid = this.ToAccountID(this._user._client.steamID);
+      callback = arg1 || null;
+    }else
+    {
+      accid = arg1;
+    }
+  }else
+  {
+    accid = this.ToAccountID(this._user._client.steamID);
+  }
 
   if (this.debug) {
     util.log("Sending recent match request with ID of " + accid);
