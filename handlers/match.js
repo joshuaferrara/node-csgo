@@ -103,13 +103,27 @@ CSGO.CSGOClient.prototype.requestGame = function(matchid, outcome, token, callba
       payload.toBuffer(), callback);
 };
 
-CSGO.CSGOClient.prototype.requestRecentGames = function(accid, callback) {
-  callback = callback || null;
+CSGO.CSGOClient.prototype.requestRecentGames = function(arg1, arg2) {
   if (!this._gcReady) {
     if (this.debug) {
       util.log("GC not ready");
     }
     return null;
+  }
+  
+  var accid = this.ToAccountID(this._user._client.steamID);
+  var callback;
+  if (arguments.length >= 2) {
+    callback = arg2 || null;
+    util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
+  }
+  else if (arguments.length == 1) {
+    if (typeof arg1 == 'function') {
+      callback = arg1 || null;
+    }
+    else {
+      util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
+    }
   }
 
   if (this.debug) {
@@ -151,7 +165,7 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchList] = function(message) {
 
 handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_WatchInfoUsers] = function(message){
   var response = protos.CMsgGCCStrike15_v2_WatchInfoUsers.decode(message);
-  if(this.debug){
+  if (this.debug) {
     util.log('Recieved watch info');
   }
   this.emit('watchList', response);
