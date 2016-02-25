@@ -115,14 +115,12 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(arg1, arg2) {
   var callback;
   if (arguments.length >= 2) {
     callback = arg2 || null;
-    util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
-  }
-  else if (arguments.length == 1) {
+    util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot accounts ID will be used.");
+  } else if (arguments.length == 1) {
     if (typeof arg1 == 'function') {
       callback = arg1 || null;
-    }
-    else {
-      util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot account's ID will be used.");
+    } else {
+      util.log("Warning: The accountId parameter for requestRecentGames has been deprecated. The logged in bot accounts ID will be used.");
     }
   }
 
@@ -133,15 +131,9 @@ CSGO.CSGOClient.prototype.requestRecentGames = function(arg1, arg2) {
   var payload = new protos.CMsgGCCStrike15_v2_MatchListRequestRecentUserGames({
     accountid: accid
   });
-  this._gc.send(
-      {
-        msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames,
-        proto: {
-
-        }
-      },
+  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames, proto: {}},
       payload.toBuffer(), callback);
-};
+  };
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
