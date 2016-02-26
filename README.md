@@ -68,9 +68,9 @@ Converts an account ID to a 64 bit steam ID.
 
 Sends a message to the Game Coordinator requesting some matchmaking stats. Listen for the `matchmakingStatsData` event for the game coordinator's response. Requires the GC to be ready (listen for the `ready` event before calling).
 
-### `requestRecentGames(accountId)`
+### `requestRecentGames()`
 
-Requests a list of recent games for the given accountId. Listen for the `matchList` event for the game coordinator's response.
+Requests a list of recent games for the currently logged in account. Listen for the `matchList` event for the game coordinator's response.
 
 ### `requestLiveGameForUser(accountId)`
 
