@@ -23,6 +23,7 @@ Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](
 * [Claimony](http://www.claimony.com/) - Get rewarded for gaming
 * [CSGOSquad](http://csgosquad.com) - Live MM game search and statistics
 * [CSGO:STATRACK](http://www.csgostattrack.com/) - Insights and Statistics for Competitive CS:GO
+* [CSGO-Mates](http://www.csgo-mates.com/) - Live Matchmaking search & Player insights
 
 # Requirements
 * node-steam
