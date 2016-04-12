@@ -22,6 +22,7 @@ Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](
 * [steamgaug.es](https://steamgaug.es/) - Matchmaking status info for CS:GO, TF2 & Dota 2. Also includes general steam status.
 * [Claimony](http://www.claimony.com/) - Get rewarded for gaming
 * [CSGOSquad](http://csgosquad.com) - Live MM game search and statistics
+* [kpd.io](http://kpd.io/) - Detailed insights and statistics for competitive CS:GO
 * [CSGO:STATRACK](http://www.csgostattrack.com/) - Insights and statistics for competitive CS:GO
 * [CSGO-Mates](http://www.csgo-mates.com/) - Live matchmaking search and player insights
 
