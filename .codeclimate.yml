@@ -1,8 +1,15 @@
+engines:
+  duplication:
+    enabled: false
+  eslint:
+    enabled: true
+    
+ratings:
+   paths:
+   - "**.js"
+   
 exclude_paths:
 - "generated/*"
 - "helpers/stringio.js"
 - "helpers/pack.js"
 - "protos/messages.js"
-engines:
-  duplication:
-    enabled: false
