@@ -1,5 +1,3 @@
-languages:
-   JavaScript: true
 exclude_paths:
 - "generated/*"
 - "helpers/stringio.js"
