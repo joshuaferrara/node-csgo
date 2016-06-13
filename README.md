@@ -71,6 +71,10 @@ Converts an account ID to a 64 bit steam ID.
 
 Converts an integer rank_id to a string. Ex: `CSGO.Rank.getString(1) = "Silver I"`
 
+### `Level.getString(int player_level)`
+
+Converts an integer player_level to a string. Ex: `CSGO.Level.getString(1) = "Recruit"`
+
 ## Matches
 
 ### `matchmakingStatsRequest()`
