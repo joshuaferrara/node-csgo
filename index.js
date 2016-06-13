@@ -173,6 +173,8 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
   }
 };
 
+CSGOClient.prototype.Rank = require("./helpers/ranks").Rank;
+
 CSGO.CSGOClient = CSGOClient;
 CSGO.SharecodeDecoder = require("./helpers/sharecode").SharecodeDecoder;
 

@@ -56,16 +56,19 @@ var onSteamLogOn = function onSteamLogOn(response){
                 util.log("Matches in Progress: " + matchmakingStatsResponse.global_stats.ongoing_matches);
                 console.log(JSON.stringify(matchmakingStatsResponse, null, 4));
 
-                CSGOCli.playerProfileRequest(CSGOCli.ToAccountID(bot.steamID)); //
+                CSGOCli.playerProfileRequest(CSGOCli.ToAccountID(bot.steamID));
                 CSGOCli.on("playerProfile", function(profile) {
                    console.log("Profile");
+                   console.log("Player Rank: " + CSGOCli.Rank.getString(profile.account_profiles[0].ranking.rank_id))
                    console.log(JSON.stringify(profile, null, 2));
                 });
 
-                CSGOCli.requestRecentGames(CSGOCli.ToAccountID(bot.steamID));
+                CSGOCli.requestRecentGames();
                 CSGOCli.on("matchList", function(list) {
                    console.log("Match List");
-                   console.log(JSON.stringify(list, null, 2));
+                   if (list.matches && list.matches.length > 0) {
+                        console.log(list.matches[0]);
+                   }
                 });
                 
                 CSGOCli.richPresenceUpload({

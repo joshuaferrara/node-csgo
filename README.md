@@ -7,7 +7,6 @@ Need help? Don't open an issue - ask in the Gitter room.
 
 [![Build Status](https://travis-ci.org/joshuaferrara/node-csgo.svg?branch=master)](https://travis-ci.org/joshuaferrara/node-csgo)
 [![Code Climate](https://codeclimate.com/github/joshuaferrara/node-csgo/badges/gpa.svg)](https://codeclimate.com/github/joshuaferrara/node-csgo)
-[![Gratipay donate button](https://img.shields.io/gratipay/joshuaferrara.svg)](https://www.gratipay.com/joshuaferrara/ "Donate weekly to this project using Gratipay")
 
 [![NPM](https://nodei.co/npm/csgo.png?downloads=true&stars=true)](https://nodei.co/npm/csgo/)
 
@@ -51,6 +50,7 @@ var Steam = require('steam'),
 All methods require the SteamClient instance to be logged on.
 
 ## CSGO
+
 ### `launch()`
 
 Reports to Steam that you're playing Counter-Strike: Global Offensive, and then initiates communication with the Game Coordinator.
@@ -66,6 +66,10 @@ Converts a 64 bit steam ID to an account ID.
 ### `ToSteamID(accountId)`
 
 Converts an account ID to a 64 bit steam ID.
+
+### `Rank.getString(int rank_id)`
+
+Converts an integer rank_id to a string. Ex: `CSGO.Rank.getString(1) = "Silver I"`
 
 ## Matches
 
