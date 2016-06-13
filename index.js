@@ -1,5 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
     util = require("util"),
+    ranks = require("./helpers/ranks"),
     protos = require("./helpers/protos"),
     protoMask = 0x80000000,
     bignumber = require("bignumber.js"),
@@ -173,7 +174,8 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
   }
 };
 
-CSGOClient.prototype.Rank = require("./helpers/ranks").Rank;
+CSGOClient.prototype.Rank = ranks.Rank;
+CSGOClient.prototype.Level = ranks.Level;
 
 CSGO.CSGOClient = CSGOClient;
 CSGO.SharecodeDecoder = require("./helpers/sharecode").SharecodeDecoder;
