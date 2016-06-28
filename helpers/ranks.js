@@ -10,7 +10,7 @@ const ranks = {
     6: "Silver Elite Master",
     7: "Gold Nova I",
     8: "Gold Nova II",
-    9: "Gold Nova II",
+    9: "Gold Nova III",
     10: "Gold Nova Master",
     11: "Master Guardian I",
     12: "Master Guardian II",
