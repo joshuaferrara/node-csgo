@@ -43,5 +43,12 @@ handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRespon
     util.log("Received item data");
   }
 
+  // Convert the paintwear uint32 to float
+  if ("iteminfo" in itemDataResponse && "paintwear" in itemDataResponse["iteminfo"]) {
+    floatbuffer = new Buffer(4);
+    floatbuffer.writeUInt32LE(itemDataResponse["iteminfo"]["paintwear"], 0);
+    itemDataResponse["iteminfo"]["floatvalue"] = floatbuffer.readFloatLE(0);
+  }
+
   this.emit("itemData", itemDataResponse);
 };
