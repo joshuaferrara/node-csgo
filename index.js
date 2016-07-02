@@ -183,3 +183,4 @@ CSGO.SharecodeDecoder = require("./helpers/sharecode").SharecodeDecoder;
 require("./handlers/match");
 require("./handlers/player");
 require("./handlers/rich_presence");
+require("./handlers/items");
