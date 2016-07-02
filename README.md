@@ -178,27 +178,27 @@ Emitted when the connection status to the GC changes, and renders the library un
 
 ### `itemData` (Response to `itemDataRequest`)
 
-```json
+```javascript
 { 
-    iteminfo:
+    "iteminfo":
    { 
-        accountid: null,
-        itemid: Long { low: -1821786863, high: 1, unsigned: true },
-        defindex: 7,
-        paintindex: 474,
-        rarity: 6,
-        quality: 4,
-        paintwear: 1054492909,
-        paintseed: 183,
-        killeaterscoretype: null,
-        killeatervalue: null,
-        customname: null,
-        stickers: [],
-        inventory: 3221225475,
-        origin: 8,
-        questid: null,
-        dropreason: null,
-        floatvalue: 0.4263376295566559 
+        "accountid": null,
+        "itemid": Long { "low": -1821786863, "high": 1, "unsigned": true },
+        "defindex": 7,
+        "paintindex": 474,
+        "rarity": 6,
+        "quality": 4,
+        "paintwear": 1054492909,
+        "paintseed": 183,
+        "killeaterscoretype": null,
+        "killeatervalue": null,
+        "customname": null,
+        "stickers": [],
+        "inventory": 3221225475,
+        "origin": 8,
+        "questid": null,
+        "dropreason": null,
+        "floatvalue": 0.4263376295566559 
     }
 }
 ```
