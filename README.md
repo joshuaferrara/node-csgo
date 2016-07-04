@@ -132,6 +132,27 @@ Requests a player's profile from the game coordinator. The player must be online
 
 Sets the rich presence object for the currently logged in user. Rich presence is Valve's solution to giving friends information on what you're doing in a game. For example, when you see information about another friends matchmaking game (as in, the map and score), this is set by using rich presence. An example of how to use this method can be found in [example.js](https://github.com/joshuaferrara/node-csgo/blob/master/example/example.js)
 
+## Item Data
+
+### `itemDataRequest(string s, string a, string d, string m)`
+
+Requests item data for the specified CSGO item inspect link parameters. The parameter `s` has a value when the inspect link is from an inventory; likewise, the parameter `m` has a value when the inspect link is from the market. If there is no value for a given parameter from the inspect link, set it to `"0"`. 
+
+Listen for the `itemData` event for the game coordinator's response.
+
+Example for an inventory inspect link for a CSGO item
+```javascript
+// steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A6768147729D12557175561287951743
+CSGO.itemDataRequest("76561198084749846", "6768147729", "12557175561287951743", "0");
+```
+
+Example for a market inspect link for a CSGO item
+```javascript
+// steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M563330426657599553A6710760926D9406593057029549017
+CSGO.itemDataRequest("0", "6710760926", "9406593057029549017", "563330426657599553");
+```
+
+
 ## Sharecode Decoding/Encoding
 
 ### `new CSGO.SharecodeDecoder(string code);`
@@ -154,6 +175,35 @@ Emitted when the GC is ready to receive messages.  Be careful not to declare ano
 
 ### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
+
+### `itemData` (`itemDataResponse`)
+
+```javascript
+{ 
+    "iteminfo":
+   { 
+        "accountid": null,
+        "itemid": Long { "low": -1821786863, "high": 1, "unsigned": true },
+        "defindex": 7,
+        "paintindex": 474,
+        "rarity": 6,
+        "quality": 4,
+        "paintwear": 1054492909,
+        "paintseed": 183,
+        "killeaterscoretype": null,
+        "killeatervalue": null,
+        "customname": null,
+        "stickers": [],
+        "inventory": 3221225475,
+        "origin": 8,
+        "questid": null,
+        "dropreason": null,
+        "floatvalue": 0.4263376295566559 
+    }
+}
+```
+
+Emitted when the game coordinator responds to the `itemDataRequest` method.
 
 ### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.

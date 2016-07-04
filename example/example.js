@@ -78,6 +78,13 @@ var onSteamLogOn = function onSteamLogOn(response){
                         time: 161.164087 // This might be the amount of time since you have started the game, not sure.
                     }
                 });
+                
+                // steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A6768147729D12557175561287951743
+                CSGOCli.itemDataRequest("76561198084749846", "6768147729", "12557175561287951743", "0");
+                
+                CSGOCli.on("itemData", function(itemdata) {
+                    console.log(itemdata);
+                });
             });
         });
 
