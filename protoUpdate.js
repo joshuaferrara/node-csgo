@@ -6,6 +6,7 @@ var path = require("path");
 var protos = [
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/base_gcmessages.proto",
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/cstrike15_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/engine_gcmessages.proto",
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/gcsdk_gcmessages.proto",
 	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/steammessages.proto",
 	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver.proto",
