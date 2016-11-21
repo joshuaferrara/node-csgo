@@ -68,11 +68,11 @@ class SharecodeDecoder {
 
 	get decoded_code() {
 		var self = this;
-		var result = Array.apply(null, new Array(18)).map(Number.prototype.valueOf, 0);
+		var result = new Array(18).fill(0);
 		var reversed = this.code.split('').reverse();
 		reversed.forEach(function(char, index) {
 			var addval = self.DICTIONARY.indexOf(char);
-			var tmp = Array.apply(null, new Array(18)).map(Number.prototype.valueOf, 0);
+			var tmp = new Array(18).fill(0);
 			var carry = 0;
 			var v = 0;
 			for(var t = 17; t >= 0; t--) {
