@@ -4,11 +4,11 @@ var url = require("url");
 var path = require("path");
 
 var protos = [
-	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/base_gcmessages.proto",
-	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/cstrike15_gcmessages.proto",
-	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/engine_gcmessages.proto",
-	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/gcsdk_gcmessages.proto",
-	"https://raw.githubusercontent.com/SteamDatabase/GameTracking/master/Protobufs/csgo/steammessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/base_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/cstrike15_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/engine_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/gcsdk_gcmessages.proto",
+	"https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/steammessages.proto",
 	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver.proto",
 	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_clientserver_2.proto",
 	"https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/steamclient/steammessages_base.proto",
