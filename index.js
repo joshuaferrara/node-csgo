@@ -114,6 +114,9 @@ CSGOClient.prototype.exit = function() {
   this._user.gamesPlayed({
     games_played: [{}]
   });
+
+  /* let everyone know we've exited */
+  this.emit("exited");
 };
 
 
