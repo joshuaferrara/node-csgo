@@ -176,6 +176,9 @@ Emitted when the GC is ready to receive messages.  Be careful not to declare ano
 ### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
 
+### `exited`
+Emitted when `.exit()` is called as a convenience for clearing handlers upon intentional exits.
+
 ### `itemData` (`itemDataResponse`)
 
 ```javascript
