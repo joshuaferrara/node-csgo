@@ -22,7 +22,7 @@ Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](
 * [Claimony](http://www.claimony.com/) - Get rewarded for gaming
 * [CSGOSquad](http://csgosquad.com) - Live MM game search and statistics
 * [CS:GO Stats](https://csgostats.gg/) - Detailed insights and statistics for competitive CS:GO
-* [CSGO:STATRACK](http://www.csgostattrack.com/) - Insights and statistics for competitive CS:GO
+* [CS:GORecords](https://csgorecords.com/) - Track the history of your CS:GO stats!
 * [CSGO-Mates](http://www.csgo-mates.com/) - Live matchmaking search and player insights
 
 > This list is getting too long. Wanna be on it? Message me on Gitter and we'll talk. - joshuaferrara
@@ -175,6 +175,9 @@ Emitted when the GC is ready to receive messages.  Be careful not to declare ano
 
 ### `unready`
 Emitted when the connection status to the GC changes, and renders the library unavailable to interact.  You should clear any event handlers set in the `ready` event here, otherwise you'll have multiple handlers for each message every time a new `ready` event is sent.
+
+### `exited`
+Emitted when `.exit()` is called as a convenience for clearing handlers upon intentional exits.
 
 ### `itemData` (`itemDataResponse`)
 
