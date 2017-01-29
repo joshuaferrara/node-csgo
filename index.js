@@ -64,6 +64,18 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
     if (!self._gc) {
       util.log("GC went missing");
     }
+    else if (!self._gc._connection) {
+      util.log("GC Connection went missing, exiting");
+
+      self._gcReady = false;
+
+      if (self._gcClientHelloIntervalId) {
+        clearInterval(self._gcClientHelloIntervalId);
+        self._gcClientHelloIntervalId = null;
+      }
+
+      self.emit("unready");
+    }
     else {
       self._gc.send({msg: CSGO.EGCBaseClientMsg.k_EMsgGCClientHello, proto: {}},
           new protos.CMsgClientHello({}).toBuffer());
