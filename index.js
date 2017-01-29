@@ -64,7 +64,7 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
     if (!self._gc) {
       util.log("GC went missing");
     }
-    else if (!self._gc._connection) {
+    else if (!self._gc._client || !self._gc._client._connection) {
       util.log("GC Connection went missing, exiting");
 
       self._gcReady = false;
