@@ -5,10 +5,8 @@
     "protobufjs": "^5.0.1",
     "deferred": "^0.7.5",
     "bignumber.js": "^2.0.7",
-    "bytebuffer": ">=3.5.5"
-  },
-  "peerDependencies": {
-    "steam": ">=1.1.0 <2.0.0"
+    "bytebuffer": ">=3.5.5",
+    "steam": "^1.4.0"
   },
   "engines": {
     "node": ">0.12.9"
