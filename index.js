@@ -120,9 +120,7 @@ CSGOClient.prototype.exit = function() {
     this._gcClientHelloIntervalId = null;
   }
   this._gcReady = false;
-  this._user.gamesPlayed({
-    games_played: [{}]
-  });
+  this._user.gamesPlayed([]);
 
   /* let everyone know we've exited */
   this.emit("exited");
