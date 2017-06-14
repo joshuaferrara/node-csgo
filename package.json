@@ -1,6 +1,6 @@
 {
   "name": "csgo",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "dependencies": {
     "protobufjs": "^5.0.1",
     "deferred": "^0.7.5",
