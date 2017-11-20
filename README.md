@@ -211,10 +211,23 @@ Emitted when the game coordinator responds to the `itemDataRequest` method.
 ### `matchmakingStatsData` (`matchmakingStatsResponse`)
 * `matchmakingStatsResponse` - Raw response object. Example response below.
 
-```json
+```javascript
 {
     "account_id": 137013074,
-    "ongoingmatch": null,
+    "ongoingmatch": {                                       // Only populated when logged in user is in a match
+        "serverid": 90112014586923017,
+        "direct_udp_ip": 2734604850,
+        "direct_udp_port": 27035,
+        "reservationid": 18374688715512210549,
+        "reservation": {
+            "game_type": 520,
+            "match_id": 3245263802660290728,
+            "tournament_event": null,
+            "pre_match_data": null
+        },
+        "map": "de_dust2",
+        "server_address": "=[A:1:153428969:9318]:0"
+    },
     "global_stats": {
         "players_online": 423480,
         "servers_online": 132472,
@@ -336,8 +349,8 @@ Emitted when the game coordinator responds to the `itemDataRequest` method.
         "active_tournament_eventid": 6,
         "active_survey_id": 0
     },
-    "penalty_seconds": null,
-    "penalty_reason": null,
+    "penalty_seconds": null,                                // Contains amount of time logged in account has an MM cooldown
+    "penalty_reason": null,                                 // Integer representing reason for MM cooldown
     "vac_banned": 0,
     "ranking": {
         "account_id": 137013074,
