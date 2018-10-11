@@ -7,7 +7,5 @@ deploy:
   on:
     repo: joshuaferrara/node-csgo
 node_js:
-- '0.12'
-- '0.11'
-- '0.10'
+    - 'node'
 sudo: false
