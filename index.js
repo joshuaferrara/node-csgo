@@ -1,12 +1,10 @@
 var EventEmitter = require('events').EventEmitter,
     util = require("util"),
     ranks = require("./helpers/ranks"),
-    protos = require("./helpers/protos"),
+    protos = require("steam-resources"),
     protoMask = 0x80000000,
     bignumber = require("bignumber.js"),
     CSGO = exports;
-
-require("./protos/messages");
 
 var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
   EventEmitter.call(this);
@@ -77,8 +75,8 @@ var CSGOClient = function CSGOClient(steamUser, steamGC, debug) {
       self.emit("unready");
     }
     else {
-      self._gc.send({msg: CSGO.EGCBaseClientMsg.k_EMsgGCClientHello, proto: {}},
-          new protos.CMsgClientHello({}).toBuffer());
+      self._gc.send({msg: protos.GC.CSGO.Internal.EGCBaseClientMsg.k_EMsgGCClientHello, proto: {}},
+          new protos.GC.CSGO.Internal.CMsgClientHello({}).toBuffer());
     }
   };
 };
@@ -131,7 +129,7 @@ CSGOClient.prototype.exit = function() {
 
 var handlers = CSGOClient.prototype._handlers = {};
 
-handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHandler(message) {
+handlers[protos.GC.CSGO.Internal.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHandler(message) {
   /* Response to our k_EMsgGCClientHello, now we can execute other GC commands. */
 
   // Only execute if _gcClientHelloIntervalID, otherwise it's already been handled (and we don't want to emit multiple 'ready');
@@ -147,10 +145,10 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHa
   }
 };
 
-handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClientConnectionStatus(message) {
+handlers[protos.GC.CSGO.Internal.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClientConnectionStatus(message) {
   /* Catch and handle changes in connection status, cuz reasons u know. */
 
-  var status = protos.CMsgConnectionStatus.decode(message).status;
+  var status = protos.GC.CSGO.Internal.CMsgConnectionStatus.decode(message).status;
 
   switch (status) {
     case CSGO.GCConnectionStatus.GCConnectionStatus_HAVE_SESSION:
