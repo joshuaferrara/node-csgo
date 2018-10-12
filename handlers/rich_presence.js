@@ -1,22 +1,23 @@
 var CSGO = require("../index"),
     util = require("util"),
-    protos = require("../helpers/protos");
+    protos = require("steam-resources"),
+    vdf = require('../helpers/VDF');
 
 CSGO.CSGOClient.prototype.richPresenceRequest = function(steamids, callback){
   this._gc._client.send({
-        msg: CSGO.EMsg.ClientRichPresenceRequest,
+        msg: protos.EMsg.ClientRichPresenceRequest,
         proto: {
           routing_appid: 730
         }
       },
-      new protos.schema.CMsgClientRichPresenceRequest({
+      new protos.Internal.CMsgClientRichPresenceRequest({
         steamid_request: steamids
       }).toBuffer(), callback);
 };
 
 CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
-  var payload = new protos.schema.CMsgClientRichPresenceUpload();
-  payload.rich_presence_kv = require("../helpers/VDF").encode(rp);
+  var payload = new protos.Internal.CMsgClientRichPresenceUpload();
+  payload.rich_presence_kv = vdf.encode(rp);
   if(this.debug){
       util.log("Rich presence Payload:")
       console.log(payload.rich_presence_kv);
@@ -25,7 +26,7 @@ CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
     payload.steamid_broadcast = steamids;
   }
   this._gc._client.send({
-        msg: CSGO.EMsg.ClientRichPresenceUpload,
+        msg: protos.EMsg.ClientRichPresenceUpload,
         proto: {
           routing_appid: 730
         }
@@ -35,8 +36,7 @@ CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
-handlers[CSGO.EMsg.ClientRichPresenceInfo] = function(data) {
-  var vdf = require('../helpers/VDF');
+handlers[protos.EMsg.ClientRichPresenceInfo] = function(data) {
   var response_kv = protos.schema.CMsgClientRichPresenceInfo.decode(data);
   var output = {};
   for(var index in response_kv.rich_presence){

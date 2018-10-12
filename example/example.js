@@ -6,9 +6,11 @@ var Steam = require("steam"),
     steamUser = new Steam.SteamUser(bot),
     steamFriends = new Steam.SteamFriends(bot),
     steamGC = new Steam.SteamGameCoordinator(bot, 730),
-    CSGOCli = new csgo.CSGOClient(steamUser, steamGC, false),
+    CSGOCli = new csgo.CSGOClient(steamUser, steamGC, true),
     readlineSync = require("readline-sync"),
     crypto = require("crypto");
+
+Steam.servers = require('./servers.json')
 
 /* Decoding Share Codes */
 var scDecoder = new csgo.SharecodeDecoder("CSGO-U6MWi-hYFWJ-opPwD-JciHm-qOijD");
@@ -74,7 +76,7 @@ var onSteamLogOn = function onSteamLogOn(response){
                 CSGOCli.richPresenceUpload({
                     RP: {
                         status: "Hello World!", // Sets rich presence text to "Hello World!"
-                        version: 13503, // Not sure what this value does
+                        version: 13508, // Not sure what this value does
                         time: 161.164087 // This might be the amount of time since you have started the game, not sure.
                     }
                 });

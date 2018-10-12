@@ -2,11 +2,23 @@
   "name": "csgo",
   "version": "1.5.7",
   "dependencies": {
-    "protobufjs": "^5.0.1",
-    "deferred": "^0.7.5",
     "bignumber.js": "^2.0.7",
     "bytebuffer": ">=3.5.5",
-    "steam": "^1.4.0"
+    "deferred": "^0.7.5",
+    "protobufjs": "^5.0.1",
+    "readline-sync": "^1.4.9",
+    "steam": "^1.4.0",
+    "steam-resources": "github:seishun/node-steam-resources"
+  },
+  "devDependencies": {
+    "mocha": "5.2.0",
+    "should": "^13.2.3"
+  },
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha test/test.js"
+  },
+  "bundledDependencies": {
+    "steam-resources": "github:seishun/node-steam-resources"
   },
   "engines": {
     "node": ">0.12.9"
@@ -22,9 +34,6 @@
     "valve",
     "csgo"
   ],
-  "scripts" : {
-    "postinstall" : "node protoUpdate.js"
-  },
   "author": {
     "name": "Joshua Ferrara"
   },

@@ -1,6 +1,6 @@
 var CSGO = require("../index"),
     util = require("util"),
-    protos = require("../helpers/protos");
+    protos = require("steam-resources");
 
 CSGO.CSGOClient.prototype.itemDataRequest = function(s, a, d, m) {
   /* 
@@ -23,21 +23,21 @@ CSGO.CSGOClient.prototype.itemDataRequest = function(s, a, d, m) {
     util.log("Sending item data request");
   }
 
-  var payload = new protos.CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest({
+  var payload = new protos.GC.CSGO.Internal.CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest({
     param_s: s,
     param_a: a,
     param_d: d,
     param_m: m
   });
 
-  this._gc.send({msg:CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest, proto: {}},
+  this._gc.send({msg: protos.GC.CSGO.Internal.ECsgoGCMsg.k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest, proto: {}},
       payload.toBuffer());
 };
 
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
-handlers[CSGO.ECSGOCMsg.k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse] = function onItemDataResponse(message) {
-  var itemDataResponse = protos.CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse.decode(message);
+handlers[protos.GC.CSGO.Internal.ECsgoGCMsg.k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse] = function onItemDataResponse(message) {
+  var itemDataResponse = protos.GC.CSGO.Internal.CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse.decode(message);
 
   if (this.debug) {
     util.log("Received item data");
