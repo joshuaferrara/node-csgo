@@ -14,6 +14,9 @@
     "mocha": "5.2.0",
     "should": "^13.2.3"
   },
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha test/test.js"
+  },
   "bundledDependencies": {
     "steam-resources": "github:seishun/node-steam-resources"
   },
