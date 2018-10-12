@@ -2,7 +2,8 @@ var Steam = require('steam'),
     CSGO = require('../'),
     steamClient = new Steam.SteamClient(),
     steamUser = new Steam.SteamUser(steamClient),
-    steamGC = new Steam.SteamGameCoordinator(steamUser, 730),
+    steamFriends = new Steam.SteamFriends(steamClient),
+    steamGC = new Steam.SteamGameCoordinator(steamClient, 730),
     CSGOCli = new CSGO.CSGOClient(steamUser, steamGC, false),
     should = require('should'),
     crypto = require('crypto');
@@ -15,11 +16,30 @@ function MakeSha(bytes) {
 
 Steam.servers = JSON.parse(`[{"host":"162.254.195.47","port":27019},{"host":"162.254.195.47","port":27018},{"host":"162.254.195.46","port":27017},{"host":"162.254.195.44","port":27018},{"host":"162.254.195.45","port":27018},{"host":"162.254.195.44","port":27019},{"host":"162.254.195.45","port":27019},{"host":"162.254.195.44","port":27017},{"host":"162.254.195.46","port":27019},{"host":"162.254.195.45","port":27017},{"host":"162.254.195.46","port":27018},{"host":"162.254.195.47","port":27017},{"host":"162.254.193.47","port":27018},{"host":"162.254.193.6","port":27017},{"host":"162.254.193.46","port":27017},{"host":"162.254.193.7","port":27019},{"host":"162.254.193.6","port":27018},{"host":"162.254.193.6","port":27019},{"host":"162.254.193.47","port":27017},{"host":"162.254.193.46","port":27019},{"host":"162.254.193.7","port":27018},{"host":"162.254.193.47","port":27019},{"host":"162.254.193.7","port":27017},{"host":"162.254.193.46","port":27018},{"host":"155.133.254.132","port":27017},{"host":"155.133.254.132","port":27018},{"host":"205.196.6.75","port":27017},{"host":"155.133.254.133","port":27019},{"host":"155.133.254.133","port":27017},{"host":"155.133.254.133","port":27018},{"host":"155.133.254.132","port":27019},{"host":"205.196.6.67","port":27018},{"host":"205.196.6.67","port":27017},{"host":"205.196.6.75","port":27019},{"host":"205.196.6.67","port":27019},{"host":"205.196.6.75","port":27018},{"host":"162.254.192.108","port":27018},{"host":"162.254.192.100","port":27017},{"host":"162.254.192.101","port":27017},{"host":"162.254.192.108","port":27019},{"host":"162.254.192.109","port":27019},{"host":"162.254.192.100","port":27018},{"host":"162.254.192.108","port":27017},{"host":"162.254.192.101","port":27019},{"host":"162.254.192.109","port":27018},{"host":"162.254.192.101","port":27018},{"host":"162.254.192.109","port":27017},{"host":"162.254.192.100","port":27019},{"host":"162.254.196.68","port":27019},{"host":"162.254.196.83","port":27019},{"host":"162.254.196.68","port":27017},{"host":"162.254.196.67","port":27017},{"host":"162.254.196.67","port":27019},{"host":"162.254.196.83","port":27017},{"host":"162.254.196.84","port":27019},{"host":"162.254.196.84","port":27017},{"host":"162.254.196.83","port":27018},{"host":"162.254.196.68","port":27018},{"host":"162.254.196.84","port":27018},{"host":"162.254.196.67","port":27018},{"host":"155.133.248.53","port":27017},{"host":"155.133.248.50","port":27017},{"host":"155.133.248.51","port":27017},{"host":"155.133.248.52","port":27019},{"host":"155.133.248.53","port":27019},{"host":"155.133.248.52","port":27018},{"host":"155.133.248.52","port":27017},{"host":"155.133.248.51","port":27019},{"host":"155.133.248.53","port":27018},{"host":"155.133.248.50","port":27018},{"host":"155.133.248.51","port":27018},{"host":"155.133.248.50","port":27019},{"host":"155.133.246.69","port":27017},{"host":"155.133.246.68","port":27018},{"host":"155.133.246.68","port":27017},{"host":"155.133.246.69","port":27018},{"host":"155.133.246.68","port":27019},{"host":"155.133.246.69","port":27019},{"host":"162.254.197.42","port":27018},{"host":"146.66.152.10","port":27018}]`);
 
-var connectedToSteam = false;
+var connectedToSteam = false,
+    connectedToGC = false,
+    loggedInToSteam = false;
+
 function beConnectedToSteam(done) {
     if (connectedToSteam) return done();
     setTimeout(() => beConnectedToSteam(done), 1000);
 }
+
+function beLoggedInToSteam(done) {
+    if (loggedInToSteam) return done();
+    setTimeout(() => beLoggedInToSteam(done), 1000);
+}
+
+function beConnectedToGC(done) {
+    if (connectedToGC) return done();
+    setTimeout(() => beConnectedToGC(done), 1000);
+}
+
+CSGOCli.on('unready', () => {
+    steamClient.disconnect();
+    console.error("Connection to GC has been lost. Failing.");
+    process.exit(1);
+});
 
 after((done) => {
     steamClient.disconnect();
@@ -31,6 +51,7 @@ describe('Steam', () => {
         it('should connect to Steam', (done) => {
             steamClient.connect();
             steamClient.on('connected', () => {
+                connectedToSteam = true;
                 done();
             });
         });
@@ -54,6 +75,59 @@ describe('Steam', () => {
                     console.error('Failed to log on to Steam.');
                     console.error(resp);
                 }
+            });
+        });
+    });
+});
+
+describe('CSGO', () => {
+    before(beLoggedInToSteam);
+
+    describe('#utils', () => {
+        it('should convert a steam ID to an account ID', (done) => {
+            should.equal(CSGOCli.ToAccountID(steamClient.steamID), 51829904);
+
+            done();
+        });
+    });
+
+    describe('#launch', () => {
+        it('should launch CSGO and connect to the GC', function(done) {
+            this.timeout(20000);
+
+            steamFriends.setPersonaState(Steam.EPersonaState.Busy);
+            CSGOCli.launch();
+
+            CSGOCli.on('ready', () => {
+                connectedToGC = true;
+                done();
+            });
+        });
+    });
+
+    describe('#mmstats', () => {
+        before(beConnectedToGC);
+
+        it('should request and receive matchmaking stats', (done) => {
+            CSGOCli.matchmakingStatsRequest();
+            CSGOCli.on('matchmakingStatsData', (data) => {
+                should.exist(data.global_stats);
+                done();
+            });
+        });
+    });
+
+    describe('#profile', () => {
+        before(beConnectedToGC);
+
+        it('should request and receive profile stats', (done) => {
+            const accId = CSGOCli.ToAccountID(steamClient.steamID);
+            CSGOCli.playerProfileRequest(accId);
+
+            CSGOCli.on('playerProfile', function(profile) {
+                should.exist(profile.account_profiles[0]);
+                should.equal(profile.account_profiles[0].account_id, accId);
+                done();
             });
         });
     });
