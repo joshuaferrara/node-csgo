@@ -21,6 +21,11 @@ function beConnectedToSteam(done) {
     setTimeout(() => beConnectedToSteam(done), 1000);
 }
 
+after((done) => {
+    steamClient.disconnect();
+    done();
+});
+
 describe('Steam', () => {
     describe('#connect', () => {
         it('should connect to Steam', (done) => {
@@ -52,4 +57,4 @@ describe('Steam', () => {
             });
         });
     });
-})
+});
