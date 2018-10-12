@@ -83,25 +83,27 @@ describe('Steam', () => {
 describe('CSGO', () => {
     before(beLoggedInToSteam);
 
-    describe('#utils', () => {
-        it('should convert a steam ID to an account ID', (done) => {
-            should.equal(CSGOCli.ToAccountID(steamClient.steamID), 51829904);
-
-            done();
-        });
-    });
-
     describe('#launch', () => {
         it('should launch CSGO and connect to the GC', function(done) {
             this.timeout(20000);
 
-            steamFriends.setPersonaState(Steam.EPersonaState.Busy);
+            steamFriends.setPersonaState(Steam.EPersonaState.Invisible);
             CSGOCli.launch();
 
             CSGOCli.on('ready', () => {
                 connectedToGC = true;
                 done();
             });
+        });
+    });
+
+    describe('#utils', () => {
+        before(beConnectedToGC);
+
+        it('should convert a steam ID to an account ID', (done) => {
+            should.exist(steamClient.steamID)
+            should.equal(CSGOCli.ToAccountID(steamClient.steamID), 51829904);
+            done();
         });
     });
 
@@ -121,12 +123,39 @@ describe('CSGO', () => {
         before(beConnectedToGC);
 
         it('should request and receive profile stats', (done) => {
-            const accId = CSGOCli.ToAccountID(steamClient.steamID);
-            CSGOCli.playerProfileRequest(accId);
-
+            CSGOCli.playerProfileRequest(CSGOCli.ToAccountID(steamClient.steamID));
             CSGOCli.on('playerProfile', function(profile) {
                 should.exist(profile.account_profiles[0]);
-                should.equal(profile.account_profiles[0].account_id, accId);
+                should.equal(profile.account_profiles[0].account_id, CSGOCli.ToAccountID(steamClient.steamID));
+                done();
+            });
+        });
+
+        it('should request recent games', (done) => {
+            CSGOCli.requestRecentGames();
+            CSGOCli.on('matchList', (list) => {
+                should.equal(list.accountid, CSGOCli.ToAccountID(steamClient.steamID));
+                (list.matches).should.be.a.Array();
+                done();
+            });
+        });
+    });
+
+    describe('#items', () => {
+        before(beConnectedToGC);
+
+        it('should request item data', (done) => {
+            CSGOCli.itemDataRequest('76561198084749846', '6768147729', '12557175561287951743', '0');  
+            CSGOCli.on('itemData', (itemdata) => {
+                const itemInfo = itemdata.iteminfo;
+                should(itemInfo.defindex).be.a.Number()
+                should(itemInfo.paintindex).be.a.Number()
+                should(itemInfo.rarity).be.a.Number()
+                should(itemInfo.quality).be.a.Number()
+                should(itemInfo.paintwear).be.a.Number()
+                should(itemInfo.paintseed).be.a.Number()
+                should(itemInfo.stickers).be.a.Array()
+                should(itemInfo.inventory).be.a.Number()
                 done();
             });
         });
