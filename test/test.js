@@ -13,7 +13,7 @@ function MakeSha(bytes) {
     return hash.digest();
 }
 
-Steam.servers = require('../example/servers.json');
+Steam.servers = require('./example/servers.json');
 
 var connectedToSteam = false;
 function beConnectedToSteam(done) {
