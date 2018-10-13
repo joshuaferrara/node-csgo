@@ -127,6 +127,8 @@ Requests a player's profile from the game coordinator. The player must be online
 
 ## Rich Presence
 
+> Note: You cannot set your rich presence to arbitrary strings anymore. Rather, games now define a list of up to 20 rich presence values that can be displayed. See the `SetRichPresence` method in [this documentation](https://partner.steamgames.com/doc/api/ISteamFriends#SetRichPresence) for more info.
+
 ### `richPresenceUpload(richPresenceObject)`
 
 Sets the rich presence object for the currently logged in user. Rich presence is Valve's solution to giving friends information on what you're doing in a game. For example, when you see information about another friends matchmaking game (as in, the map and score), this is set by using rich presence. An example of how to use this method can be found in [example.js](https://github.com/joshuaferrara/node-csgo/blob/master/example/example.js)
