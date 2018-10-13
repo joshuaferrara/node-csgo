@@ -77,7 +77,11 @@ var onSteamLogOn = function onSteamLogOn(response){
                     RP: {
                         status: "Hello World!", // Sets rich presence text to "Hello World!"
                         version: 13508, // Not sure what this value does
-                        time: 161.164087 // This might be the amount of time since you have started the game, not sure.
+                        time: 161.164087, // This might be the amount of time since you have started the game, not sure.
+                        "game:state": "lobby",
+                        steam_display: "#display_Lobby",
+                        connect: "+gcconnectG082AA752",
+                        "game:mode": "casual"
                     }
                 });
                 
