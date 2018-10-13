@@ -1,6 +1,6 @@
 {
   "name": "csgo",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "dependencies": {
     "bignumber.js": "^2.0.7",
     "bytebuffer": ">=3.5.5",
