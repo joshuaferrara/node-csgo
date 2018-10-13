@@ -37,7 +37,7 @@ CSGO.CSGOClient.prototype.richPresenceUpload = function(rp, steamids, callback){
 var handlers = CSGO.CSGOClient.prototype._handlers;
 
 handlers[protos.EMsg.ClientRichPresenceInfo] = function(data) {
-  var response_kv = protos.schema.CMsgClientRichPresenceInfo.decode(data);
+  var response_kv = protos.Internal.CMsgClientRichPresenceInfo.decode(data);
   var output = {};
   for(var index in response_kv.rich_presence){
     if(response_kv.rich_presence.hasOwnProperty(index)){
