@@ -1,6 +1,6 @@
 {
   "name": "csgo",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "dependencies": {
     "bignumber.js": "^2.0.7",
     "bytebuffer": ">=3.5.5",
@@ -17,9 +17,9 @@
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test/test.js"
   },
-  "bundledDependencies": {
-    "steam-resources": "github:seishun/node-steam-resources"
-  },
+  "bundledDependencies": [
+    "steam-resources"
+  ],
   "engines": {
     "node": ">0.12.9"
   },
