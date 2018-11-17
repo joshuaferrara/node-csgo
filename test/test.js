@@ -107,12 +107,16 @@ describe('CSGO', () => {
         });
     });
 
+    var mmStatsChecked = false;
     describe('#mmstats', () => {
         before(beConnectedToGC);
 
         it('should request and receive matchmaking stats', (done) => {
             CSGOCli.matchmakingStatsRequest();
             CSGOCli.on('matchmakingStatsData', (data) => {
+                if (mmStatsChecked) return;
+                mmStatsChecked = true;
+
                 should.exist(data.global_stats);
                 done();
             });
@@ -122,18 +126,26 @@ describe('CSGO', () => {
     describe('#profile', () => {
         before(beConnectedToGC);
 
+        var profileStatsChecked = false;
         it('should request and receive profile stats', (done) => {
             CSGOCli.playerProfileRequest(CSGOCli.ToAccountID(steamClient.steamID));
             CSGOCli.on('playerProfile', function(profile) {
+                if (profileStatsChecked) return;
+                profileStatsChecked = true;
+
                 should.exist(profile.account_profiles[0]);
                 should.equal(profile.account_profiles[0].account_id, CSGOCli.ToAccountID(steamClient.steamID));
                 done();
             });
         });
 
+        var matchListChecked = false;
         it('should request recent games', (done) => {
             CSGOCli.requestRecentGames();
             CSGOCli.on('matchList', (list) => {
+                if (matchListChecked) return;
+                matchListChecked = true;
+
                 should.equal(list.accountid, CSGOCli.ToAccountID(steamClient.steamID));
                 (list.matches).should.be.a.Array();
                 done();
