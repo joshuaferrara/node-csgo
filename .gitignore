@@ -36,6 +36,5 @@ node_modules
 
 protos/*.proto
 
-example/servers.json
 example/servers
 example/sentry
