@@ -151,10 +151,7 @@ handlers[protos.GC.CSGO.Internal.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus
   var status = protos.GC.CSGO.Internal.CMsgConnectionStatus.decode(message).status;
 
   switch (status) {
-    // TODO: This is a temporary fix since CSGO.GCConnectionStatus is undefined. 
-    // Should be extracted from protos.GC.CSGO instead?
-    // case CSGO.GCConnectionStatus.GCConnectionStatus_HAVE_SESSION:
-    case 0:
+    case protos.GC.CSGO.Internal.GCConnectionStatus.GCConnectionStatus_HAVE_SESSION:
       if (this.debug) {
         util.log("GC Connection Status regained.");
       }
