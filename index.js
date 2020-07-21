@@ -102,8 +102,11 @@ CSGOClient.prototype.launch = function() {
   
   this._user.gamesPlayed([{game_id: '730'}]);
 
-  // Keep knocking on the GCs door until it accepts us.
-  this._gcClientHelloIntervalId = setInterval(this._sendClientHello, 2500);
+  // Only start knocking if we didn't already
+  if(!this._gcClientHelloIntervalId) {
+      // Keep knocking on the GCs door until it accepts us.
+      this._gcClientHelloIntervalId = setInterval(this._sendClientHello, 2500);
+  }
 };
 
 CSGOClient.prototype.exit = function() {
