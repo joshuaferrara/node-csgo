@@ -18,11 +18,7 @@ Based on [node-dota2](https://github.com/RJacksonm1/node-dota2) by [RJacksonm1](
 
 # Used by
 * [PopFlash](https://popflash.site/) - Alternative CS:GO matchmaking & PUG service.
-* [steamgaug.es](https://steamgaug.es/) - Matchmaking status info for CS:GO, TF2 & Dota 2. Also includes general steam status.
-* [CSGOSquad](http://csgosquad.com) - Live MM game search and statistics
 * [CS:GO Stats](https://csgostats.gg/) - Detailed insights and statistics for competitive CS:GO
-* [CSGO-Mates](http://www.csgo-mates.com/) - Live matchmaking search and player insights
-* [CSGO-Stalker](https://csgo-stalker.com) - Track any Wingman or competitive game in real-time
 
 > This list is getting too long. Wanna be on it? Message me on Gitter and we'll talk. - joshuaferrara
 
