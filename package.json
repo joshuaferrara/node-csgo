@@ -5,7 +5,7 @@
     "bignumber.js": "^2.0.7",
     "bytebuffer": ">=3.5.5",
     "deferred": "^0.7.5",
-    "protobufjs": "^5.0.1",
+    "protobufjs": "^6.11.3",
     "readline-sync": "^1.4.9",
     "steam": "^1.4.0",
     "steam-resources": "github:seishun/node-steam-resources"
