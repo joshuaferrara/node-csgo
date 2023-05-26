@@ -13,11 +13,24 @@ var Type = {
     End: 8,
 };
 
+const needed_methods = [
+    "readUint8",
+    "readCString",
+    "readInt3",
+    "readUint64",
+    "readFloat",
+]
+
 exports.decode = function(buffer) {
     var object = {};
-    if(typeof(buffer.readUint8) != "function"){
-        buffer = ByteBuffer.wrap(buffer);
+
+    for (let needed_method of needed_methods) {
+        if (typeof(buffer[needed_method]) != "function") {
+             buffer = ByteBuffer.wrap(buffer);
+             break;
+        }
     }
+
     if(buffer.offset != buffer.limit) {
         while (true) {
             var type = buffer.readUint8();
